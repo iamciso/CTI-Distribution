@@ -1,0 +1,29 @@
+#!/bin/sh
+# Ajustes de sistema: cortafuegos, servicios, permisos.
+set -e
+
+# Cortafuegos restrictivo por defecto (ver /etc/nftables.conf)
+systemctl enable nftables
+
+# Servicios que NO deben arrancar solos: el analista decide cuándo usarlos.
+systemctl disable tor || true
+systemctl disable docker || true
+systemctl disable clamav-freshclam || true
+systemctl disable dnscrypt-proxy || true
+
+# Grupos del usuario en vivo (live-config lo crea en el arranque).
+mkdir -p /etc/live/config.conf.d
+cat > /etc/live/config.conf.d/10-ctidistro.conf <<'CONF'
+LIVE_USER_DEFAULT_GROUPS="audio cdrom dip floppy video plugdev netdev sudo docker wireshark"
+CONF
+
+# Wireshark: permitir captura a miembros del grupo wireshark
+echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections
+dpkg-reconfigure -f noninteractive wireshark-common || true
+
+# Scripts propios ejecutables
+chmod 0755 /usr/local/bin/cti-* 2>/dev/null || true
+
+# Directorio de stacks accesible
+mkdir -p /opt/cti/stacks
+chmod 0755 /opt/cti /opt/cti/stacks

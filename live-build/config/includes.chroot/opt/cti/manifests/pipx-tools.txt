@@ -1,0 +1,19 @@
+# Una herramienta por línea. Formato: <paquete-pypi>[==version]
+# TODO (fase 1): fijar versiones una vez validado el build inicial.
+spiderfoot
+sherlock-project
+maigret
+holehe
+socialscan
+ghunt
+h8mail
+bbot
+waybackpy
+iocextract
+attackcti
+mitreattack-python
+sigma-cli
+flare-capa
+pdfid
+censys
+emailrep

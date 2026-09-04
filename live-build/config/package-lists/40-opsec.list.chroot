@@ -1,0 +1,23 @@
+# OPSEC: anonimato, cifrado, aislamiento y limpieza
+tor
+torsocks
+torbrowser-launcher
+proxychains4
+macchanger
+wireguard
+openvpn
+dnscrypt-proxy
+nftables
+apparmor
+apparmor-profiles
+apparmor-utils
+firejail
+firejail-profiles
+opensnitch
+python3-opensnitch-ui
+onionshare
+bleachbit
+secure-delete
+age
+zulucrypt-gui
+usbguard

@@ -1,0 +1,22 @@
+#!/bin/sh
+# Parámetros de configuración de live-build para CTI Distribution.
+# Se invoca con "lb config" (auto/config se ejecuta automáticamente).
+set -e
+
+lb config noauto \
+    --distribution trixie \
+    --architectures amd64 \
+    --archive-areas "main contrib non-free non-free-firmware" \
+    --binary-images iso-hybrid \
+    --debian-installer live \
+    --debian-installer-gui false \
+    --linux-flavours amd64 \
+    --firmware-chroot true \
+    --firmware-binary true \
+    --memtest none \
+    --iso-application "CTI Distribution" \
+    --iso-volume "CTIDISTRO" \
+    --iso-publisher "CTI Distribution Project" \
+    --image-name "ctidistro" \
+    --bootappend-live "boot=live components username=analyst hostname=ctidistro locales=es_ES.UTF-8 keyboard-layouts=es timezone=Europe/Madrid persistence persistence-encryption=luks" \
+    "${@}"

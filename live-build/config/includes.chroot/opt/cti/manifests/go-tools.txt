@@ -1,0 +1,11 @@
+# Una herramienta por línea. Formato: <ruta-modulo>@<version>
+# TODO (fase 1): sustituir @latest por versiones fijas para builds reproducibles.
+github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+github.com/projectdiscovery/dnsx/cmd/dnsx@latest
+github.com/projectdiscovery/httpx/cmd/httpx@latest
+github.com/projectdiscovery/katana/cmd/katana@latest
+github.com/tomnomnom/waybackurls@latest
+github.com/tomnomnom/assetfinder@latest
+github.com/lc/gau/v2/cmd/gau@latest
+github.com/sensepost/gowitness@latest
+github.com/VirusTotal/vt-cli/vt@latest

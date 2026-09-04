@@ -1,0 +1,37 @@
+#!/bin/sh
+# Comprueba la postura de red antes de investigar: IP pública, si sale por Tor,
+# resolvedor DNS visible y estado de la MAC.
+set -u
+
+echo "== Interfaces activas =="
+ip -brief address | grep -v '^lo' || true
+echo
+
+echo "== MAC actual vs permanente =="
+for dev in $(ip -brief link | awk '$1!="lo"{print $1}'); do
+    perm=$(ethtool -P "$dev" 2>/dev/null | awk '{print $3}')
+    cur=$(cat "/sys/class/net/$dev/address" 2>/dev/null)
+    printf '%-12s actual=%s permanente=%s\n' "$dev" "${cur:-?}" "${perm:-?}"
+done
+echo
+
+echo "== Salida a Internet =="
+resp=$(curl -s --max-time 10 https://check.torproject.org/api/ip 2>/dev/null)
+if [ -n "$resp" ]; then
+    ip=$(printf '%s' "$resp" | jq -r '.IP // "?"')
+    tor=$(printf '%s' "$resp" | jq -r '.IsTor')
+    echo "IP publica : $ip"
+    if [ "$tor" = "true" ]; then
+        echo "Tor        : SI (el trafico sale por la red Tor)"
+    else
+        echo "Tor        : NO (el trafico sale directo o por VPN)"
+    fi
+else
+    echo "Sin respuesta de check.torproject.org (sin red o bloqueado)"
+fi
+echo
+
+echo "== Resolvedor DNS visible por terceros =="
+res=$(dig +short +time=5 whoami.akamai.net 2>/dev/null | head -1)
+echo "Resolvedor : ${res:-desconocido}"
+echo "Local      : $(grep -m1 nameserver /etc/resolv.conf 2>/dev/null | awk '{print $2}')"

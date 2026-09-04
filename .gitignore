@@ -1,0 +1,24 @@
+# Artefactos de live-build
+live-build/.build/
+live-build/cache/
+live-build/chroot/
+live-build/binary/
+live-build/local/
+live-build/*.iso
+live-build/*.log
+live-build/*.packages
+live-build/*.contents
+live-build/*.files
+live-build/*.zsync
+live-build/*.buildinfo
+live-build/*.hybrid.iso
+live-build/config/binary
+live-build/config/bootstrap
+live-build/config/chroot
+live-build/config/common
+live-build/config/source
+live-build/config/build
+# Clones de plataformas externas
+tools/stacks/*/
+!tools/stacks/README.md
+!tools/stacks/fetch-stacks.sh

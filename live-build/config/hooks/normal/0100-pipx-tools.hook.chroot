@@ -1,0 +1,25 @@
+#!/bin/sh
+# Instala herramientas Python en entornos aislados con pipx.
+# Los binarios quedan en /usr/local/bin y los venvs en /opt/pipx.
+set -e
+
+MANIFEST=/opt/cti/manifests/pipx-tools.txt
+export PIPX_HOME=/opt/pipx
+export PIPX_BIN_DIR=/usr/local/bin
+export PIP_NO_CACHE_DIR=1
+
+grep -vE '^\s*(#|$)' "$MANIFEST" | while read -r spec; do
+    echo ">>> pipx install $spec"
+    if ! pipx install "$spec"; then
+        echo "!!! fallo instalando $spec" >&2
+        echo "$spec" >> /opt/cti/manifests/pipx-failed.txt
+    fi
+done
+
+if [ -s /opt/cti/manifests/pipx-failed.txt ]; then
+    echo "Herramientas pipx que fallaron:" >&2
+    cat /opt/cti/manifests/pipx-failed.txt >&2
+    # No abortamos el build por una herramienta de terceros rota; queda registrado.
+fi
+
+rm -rf /root/.cache/pip

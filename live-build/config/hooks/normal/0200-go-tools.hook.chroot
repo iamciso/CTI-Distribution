@@ -1,0 +1,20 @@
+#!/bin/sh
+# Compila herramientas Go que no existen en Debian y deja los binarios en /usr/local/bin.
+set -e
+
+MANIFEST=/opt/cti/manifests/go-tools.txt
+export GOPATH=/tmp/gopath
+export GOCACHE=/tmp/gocache
+export GOBIN=/usr/local/bin
+export GOFLAGS=-trimpath
+export CGO_ENABLED=0
+
+grep -vE '^\s*(#|$)' "$MANIFEST" | while read -r spec; do
+    echo ">>> go install $spec"
+    if ! go install "$spec"; then
+        echo "!!! fallo compilando $spec" >&2
+        echo "$spec" >> /opt/cti/manifests/go-failed.txt
+    fi
+done
+
+rm -rf "$GOPATH" "$GOCACHE"
