@@ -145,7 +145,7 @@ evidence	desktop	Thunderbird	thunderbird.desktop	Correo con OpenPGP
 governance	help	Lynis	lynis --help	Auditoría de seguridad y hardening del sistema
 governance	help	OpenSCAP	oscap --help	Evaluación de cumplimiento con guías SCAP (ANSSI, CIS...)
 governance	help	cti-selfaudit	cti-selfaudit --help	Autoauditoría de esta estación (Lynis + OpenSCAP)
-governance	help	testssl.sh	testssl.sh --help	Auditoría de configuración TLS de un servicio propio
+governance	help	testssl.sh	testssl --help	Auditoría de configuración TLS de un servicio propio
 governance	help	ssh-audit	ssh-audit --help	Auditoría de configuración SSH
 governance	help	trestle (OSCAL)	trestle --help	Catálogos y perfiles de controles en OSCAL (NIST)
 governance	help	cve-bin-tool	cve-bin-tool --help	Vulnerabilidades conocidas en binarios y dependencias

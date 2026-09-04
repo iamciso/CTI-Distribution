@@ -1,5 +1,8 @@
 ## Reglas base de auditd para la estación del analista: trazabilidad de cambios sensibles
 ## sin inundar el registro. Ver docs/opsec.md. Las reglas se cargan con augenrules al arrancar.
+## -i: no abortar la carga si una regla falla (por ejemplo, un fichero vigilado que aún no existe);
+## si augenrules falla, auditd.service no arranca por dependencia.
+-i
 -D
 -b 8192
 -f 1
@@ -22,7 +25,7 @@
 ## Módulos del kernel y montajes
 -a always,exit -F arch=b64 -S init_module,finit_module,delete_module -k kernel_modules
 -a always,exit -F arch=b64 -S mount,umount2 -F auid>=1000 -F auid!=unset -k mounts
-## Evidencias del analista: escrituras y borrados en ~/Evidence
--w /home/analyst/Evidence/ -p wa -k evidence
+## Evidencias del analista: se vigila /home (no ~/Evidence, que no existe al arrancar)
+-w /home/ -p a -k home_attr
 ## Hacer inmutable la configuración hasta el próximo arranque (descomentar en sistemas instalados)
 #-e 2

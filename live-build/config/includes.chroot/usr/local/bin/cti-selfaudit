@@ -34,7 +34,13 @@ echo "== OpenSCAP ($PROFILE) =="
 oscap xccdf eval --profile "$PROFILE" --results "$OUT/oscap-results.xml" --report "$OUT/oscap-report.html" "$DS" > "$OUT/oscap.txt" 2>&1 || true
 passed=$(grep -c 'Result.*pass' "$OUT/oscap.txt" || true)
 failed=$(grep -c 'Result.*fail' "$OUT/oscap.txt" || true)
-echo "   reglas superadas: $passed, fallidas: $failed (informe: $OUT/oscap-report.html)"
+na=$(grep -c 'Result.*notapplicable' "$OUT/oscap.txt" || true)
+echo "   reglas superadas: $passed, fallidas: $failed, no aplicables: $na (informe: $OUT/oscap-report.html)"
+if [ "$passed" -eq 0 ] && [ "$failed" -eq 0 ] && [ "$na" -gt 0 ]; then
+    echo "   Aviso: la guía SSG disponible ($DS) declara la plataforma Debian 12 y OpenSCAP la"
+    echo "   considera no aplicable a Debian 13; el resultado útil es el de Lynis hasta que trixie"
+    echo "   reciba ssg-debian con contenido para Debian 13."
+fi
 
 chown -R "$OWNER" "$HOMEDIR/Audit"
 echo "Informes en $OUT"
