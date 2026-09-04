@@ -13,6 +13,7 @@ console-setup
 keyboard-configuration
 network-manager
 cryptsetup
+cryptsetup-initramfs
 dosfstools
 parted
 gdisk

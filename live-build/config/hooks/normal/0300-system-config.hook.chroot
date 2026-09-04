@@ -8,6 +8,7 @@ systemctl enable nftables
 # Servicios que NO deben arrancar solos: el analista decide cuándo usarlos.
 systemctl disable tor || true
 systemctl disable docker || true
+systemctl disable containerd || true
 systemctl disable clamav-freshclam || true
 systemctl disable dnscrypt-proxy || true
 # OpenSnitch reescribe reglas de nftables al arrancar (intercepta DNS con nfqueue); se activa
