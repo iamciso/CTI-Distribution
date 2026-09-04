@@ -24,7 +24,7 @@ gestión de evidencias y la seguridad operacional (OPSEC) del analista**.
 |---|---|---|
 | Base | Debian 13 "trixie" | Estable, enorme archivo de paquetes, mismo enfoque que Kali, Parrot y Tails |
 | Constructor | `live-build` | Estándar Debian, reproducible, soporta persistencia cifrada e instalador |
-| Escritorio | XFCE | Ligero para arranque en vivo y máquinas virtuales |
+| Escritorio | GNOME (Wayland) con dock inferior, Arc Menu y tema oscuro | Aspecto limpio y profesional; menú de herramientas por categorías al estilo Kali |
 | Herramientas Python | `pipx` (entornos aislados en `/opt/pipx`) | Evita conflictos con el Python del sistema |
 | Herramientas Go | compiladas en build, binarios en `/usr/local/bin` | No existen en Debian, se fijan versiones |
 | Plataformas pesadas (OpenCTI, MISP, ATT&CK Navigator) | Docker Compose bajo `/opt/cti/stacks` | No pueden empaquetarse razonablemente; se levantan bajo demanda |
@@ -47,6 +47,7 @@ Documentación de diseño en [`docs/`](docs/):
 │   └── config/
 │       ├── package-lists/    Paquetes Debian por capa (*.list.chroot)
 │       ├── hooks/normal/     Scripts ejecutados dentro del chroot durante el build
+│       │                     (pipx, venv, Go, servicios, menú de herramientas y escritorio)
 │       └── includes.chroot/  Ficheros copiados tal cual al sistema (configs, scripts, manifiestos)
 ├── tools/stacks/             Despliegue de plataformas CTI vía Docker Compose
 ├── tests/                    Comprobación de paquetes y smoke tests
@@ -71,7 +72,19 @@ Prueba rápida en QEMU:
 qemu-system-x86_64 -m 4096 -enable-kvm -cdrom live-build/*.iso -boot d
 ```
 
-Usuario en vivo: `analyst` (sin contraseña, con `sudo`). Teclado `es`, locale `es_ES.UTF-8`.
+Usuario en vivo: `analyst` (contraseña `live`, con `sudo` sin contraseña). Teclado `es`, locale `es_ES.UTF-8`.
+
+## Escritorio y menú de herramientas
+
+GNOME con dock inferior (Dash to Dock), Arc Menu a la izquierda del panel, botones de ventana a la
+izquierda, tipografía Inter, iconos Papirus y tema oscuro. Los ajustes por defecto están en
+`live-build/config/includes.chroot/etc/dconf/db/local.d/00-ctidistro`.
+
+Las herramientas se ordenan por funcionalidad (1. Reconocimiento, 2. Personas y redes sociales,
+3. Ficheros, medios y metadatos, 4. Análisis CTI, 5. OPSEC y anonimato, 6. Evidencias e informes,
+7. Plataformas), tanto en Arc Menu como en carpetas de la parrilla de aplicaciones. El menú se genera
+en el build a partir de un único manifiesto, `live-build/config/includes.chroot/opt/cti/menu/tools.tsv`;
+cada herramienta de terminal se abre con `cti-run`, que muestra su ayuda y deja un shell listo.
 
 ## Estado
 

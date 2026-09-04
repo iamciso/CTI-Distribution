@@ -23,7 +23,7 @@ Se evaluaron cuatro opciones:
 ├─────────────────────────────────────────────────────────────┤
 │ 2. Capa OPSEC (includes.chroot + hooks)                     │  nftables, MAC random, Firefox endurecido
 ├─────────────────────────────────────────────────────────────┤
-│ 1. Escritorio XFCE (package-list 10)                        │
+│ 1. Escritorio GNOME + menú por categorías (lista 10, hook 0400)│
 ├─────────────────────────────────────────────────────────────┤
 │ 0. Debian 13 base + kernel + firmware (package-list 00)     │
 └─────────────────────────────────────────────────────────────┘
@@ -42,6 +42,8 @@ puede eliminar o sustituir una capa sin tocar las demás.
    - `0150` crea `/opt/cti/venv` con librerías CTI (stix2, pymisp) y un kernel de Jupyter.
    - `0200` compila herramientas Go.
    - `0300` habilita/deshabilita servicios, grupos del usuario, permisos.
+   - `0400` rasteriza el fondo, genera el menú de herramientas por categorías desde
+     `/opt/cti/menu/tools.tsv` (lanzadores `.desktop`, menú XDG y carpetas de GNOME) y compila dconf.
 4. `lb binary` genera el squashfs, el cargador de arranque y la ISO híbrida (BIOS + UEFI, grabable en USB).
 
 Los fallos de herramientas de terceros (PyPI o GitHub caídos, dependencias rotas) no abortan el build:
@@ -57,7 +59,10 @@ quedan registrados en `/opt/cti/manifests/*-failed.txt` para revisarlos.
 
 ## Convenciones
 
-- Scripts propios: prefijo `cti-`, POSIX sh, en `/usr/local/bin`.
+- Scripts propios: prefijo `cti-`, POSIX sh, en `/usr/local/bin` (`cti-run` abre una herramienta de
+  terminal desde el menú; `generate-menu.py` es la excepción en Python).
+- Menú de herramientas: una línea por herramienta en `/opt/cti/menu/tools.tsv` (categoría, tipo,
+  nombre, comando o `.desktop`, descripción). Añadir una herramienta = añadir una línea.
 - Manifiestos de herramientas externas en `/opt/cti/manifests/` (fuente única de verdad para el build y
   para el smoke test).
 - El smoke test vive en la imagen (`/usr/local/bin/cti-smoke-test`); `tests/smoke-test.sh` es un

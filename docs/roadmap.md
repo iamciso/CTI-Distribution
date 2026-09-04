@@ -26,7 +26,8 @@
 
 ## Fase 3 - Experiencia de analista
 
-- [ ] Menú XFCE organizado por categorías (Reconocimiento, Personas, Ficheros, CTI, OPSEC, Reporting).
+- [x] Menú organizado por categorías (Reconocimiento, Personas, Ficheros, CTI, OPSEC, Evidencias,
+      Plataformas) generado desde `tools.tsv`; escritorio GNOME con aspecto limpio.
 - [ ] Plantillas de caso: estructura de carpetas, informe Markdown con pandoc, matriz ACH, escala Admiralty.
 - [ ] `cti-evidence` con sellado de tiempo externo (OpenTimestamps) y exportación a STIX.
 - [ ] Notas: evaluar Obsidian/Joplin vía Flatpak.

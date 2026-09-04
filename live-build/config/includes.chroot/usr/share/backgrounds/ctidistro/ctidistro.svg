@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fondo de escritorio de CTI Distribution: degradado oscuro con arcos sutiles. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440">
+  <defs>
+    <radialGradient id="bg" cx="70%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#1b2a3d"/>
+      <stop offset="55%" stop-color="#0f1824"/>
+      <stop offset="100%" stop-color="#080c12"/>
+    </radialGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <rect width="2560" height="1440" fill="url(#bg)"/>
+  <g fill="none" stroke="url(#glow)" stroke-width="2">
+    <circle cx="1900" cy="380" r="420"/>
+    <circle cx="1900" cy="380" r="640"/>
+    <circle cx="1900" cy="380" r="900"/>
+    <circle cx="1900" cy="380" r="1200"/>
+  </g>
+  <g fill="none" stroke="#3b82f6" stroke-opacity="0.12" stroke-width="1">
+    <path d="M0 1100 C 600 900, 1200 1300, 2560 1000"/>
+    <path d="M0 1240 C 700 1040, 1300 1420, 2560 1140"/>
+  </g>
+  <g fill="#22d3ee" fill-opacity="0.55">
+    <circle cx="1900" cy="380" r="4"/>
+    <circle cx="1480" cy="380" r="3"/>
+    <circle cx="2320" cy="380" r="3"/>
+    <circle cx="1900" cy="-20" r="3"/>
+    <circle cx="1900" cy="800" r="3"/>
+  </g>
+</svg>
