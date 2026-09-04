@@ -10,6 +10,9 @@ systemctl disable tor || true
 systemctl disable docker || true
 systemctl disable clamav-freshclam || true
 systemctl disable dnscrypt-proxy || true
+# OpenSnitch reescribe reglas de nftables al arrancar (intercepta DNS con nfqueue); se activa
+# a demanda: sudo systemctl start opensnitch
+systemctl disable opensnitch || true
 
 # Grupos del usuario en vivo (live-config lo crea en el arranque).
 mkdir -p /etc/live/config.conf.d

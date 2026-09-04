@@ -22,7 +22,7 @@ riesgos que la distribución debe reducir:
 | 1, 3 | MAC aleatoria por conexión y en escaneo Wi-Fi | `etc/NetworkManager/conf.d/99-mac-randomization.conf` |
 | 1, 3 | Firefox sin telemetría, sin cuenta, DoH, protección de rastreo, uBlock | `etc/firefox-esr/policies/policies.json` |
 | 3 | nftables: todo lo entrante cerrado | `etc/nftables.conf` |
-| 3 | Tor, Docker, freshclam y dnscrypt instalados pero apagados | hook `0300` |
+| 3 | Tor, Docker, freshclam, dnscrypt y OpenSnitch instalados pero apagados | hook `0300` |
 | 1 | `cti-netcheck` verifica IP pública, salida por Tor y resolvedor DNS antes de empezar | `usr/local/bin/cti-netcheck` |
 | 2 | Multi-Account Containers para separar identidades; Tor Browser para la máxima separación | Firefox / torbrowser-launcher |
 | 4 | Firejail y AppArmor para abrir ficheros sospechosos; triaje con yara/oletools/capa antes de abrir | listas 30 y 40 |

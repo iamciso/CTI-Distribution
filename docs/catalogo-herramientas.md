@@ -80,7 +80,7 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | nftables | deb | GPL-2 | Cortafuegos entrante cerrado |
 | macchanger + NetworkManager | deb | GPL | MAC aleatoria por conexión |
 | AppArmor, Firejail | deb | GPL | Confinamiento de aplicaciones |
-| OpenSnitch | deb | GPL-3 | Cortafuegos de aplicaciones saliente |
+| OpenSnitch | deb | GPL-3 | Cortafuegos de aplicaciones saliente. Deshabilitado por defecto: al arrancar añade reglas nftables propias (`sudo systemctl start opensnitch`) |
 | OnionShare | deb | GPL-3 | Compartir ficheros vía Tor |
 | KeePassXC, age, GnuPG | deb | GPL / Apache-2 | Credenciales y cifrado |
 | Discos de GNOME, cryptsetup | deb | GPL | Volúmenes LUKS con interfaz gráfica y por consola |
