@@ -1,0 +1,14 @@
+#!/bin/sh
+# Escritorio: fondo de pantalla, menú de herramientas por categorías y ajustes por defecto.
+set -e
+
+# Fondo: el SVG del repositorio se rasteriza a PNG (GNOME lo carga más rápido y sin sorpresas).
+rsvg-convert -w 2560 -h 1440 -o /usr/share/backgrounds/ctidistro/ctidistro.png \
+    /usr/share/backgrounds/ctidistro/ctidistro.svg
+
+# Menú por categorías (lanzadores, menú XDG y carpetas de GNOME) desde /opt/cti/menu/tools.tsv
+python3 /opt/cti/menu/generate-menu.py
+update-desktop-database /usr/share/applications || true
+
+# Compila la base de datos dconf del sistema (/etc/dconf/db/local.d -> /etc/dconf/db/local)
+dconf update

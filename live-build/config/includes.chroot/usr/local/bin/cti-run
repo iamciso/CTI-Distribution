@@ -1,0 +1,11 @@
+#!/bin/sh
+# Lanza una herramienta de terminal desde el menú de aplicaciones (estilo Kali): abre una
+# ventana de terminal, muestra la ayuda del comando indicado y deja un shell listo para usarla.
+# Uso: cti-run <comando> [argumentos...]
+set -u
+[ $# -ge 1 ] || { echo "Uso: cti-run <comando> [argumentos...]" >&2; exit 1; }
+exec gnome-terminal --title="$1" -- bash -c '
+printf "\033[1;36m== %s ==\033[0m\n\n" "$*"
+"$@" 2>&1 | head -n 100
+printf "\n\033[2mShell listo. Escribe el comando para usar la herramienta.\033[0m\n"
+exec bash -i' _ "$@"

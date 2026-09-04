@@ -1,0 +1,128 @@
+# Menú de herramientas de CTI Distribution, organizado por funcionalidad (estilo Kali).
+# El hook 0400 genera a partir de este fichero los lanzadores .desktop, el menú XDG
+# (Arc Menu / menús clásicos) y las carpetas de la parrilla de aplicaciones de GNOME.
+#
+# Formato (campos separados por tabulador):
+#   categoria	tipo	nombre	comando-o-fichero	descripcion
+# tipo:
+#   help     abre un terminal, muestra la ayuda del comando y deja un shell (cti-run)
+#   term     ejecuta el comando en un terminal (herramientas interactivas)
+#   url      abre la URL en el navegador
+#   desktop  referencia un lanzador .desktop ya existente (aplicación gráfica)
+#
+# Categorías: recon, people, files, cti, opsec, evidence, platforms (ver CATEGORIES en generate-menu.py)
+
+recon	help	theHarvester	theHarvester -h	Correos, subdominios e IPs desde fuentes públicas
+recon	term	recon-ng	recon-ng	Framework modular de reconocimiento con claves API
+recon	help	Amass	amass -h	Enumeración de subdominios y mapeo de superficie
+recon	help	subfinder	subfinder -h	Subdominios desde fuentes pasivas
+recon	help	dnsx	dnsx -h	Resolución y consultas DNS masivas
+recon	help	httpx	httpx -h	Verificación de servicios HTTP y huella tecnológica
+recon	help	katana	katana -h	Rastreo de sitios web
+recon	help	hakrawler	hakrawler -h	Descubrimiento rápido de enlaces y endpoints
+recon	help	gau	gau -h	URLs conocidas desde Wayback, CommonCrawl, OTX y URLScan
+recon	help	waybackurls	waybackurls -h	URLs históricas de Wayback Machine
+recon	help	assetfinder	assetfinder --help	Dominios y subdominios relacionados
+recon	help	uncover	uncover -h	Búsqueda unificada en Shodan, Censys, FOFA y otros
+recon	help	asnmap	asnmap -h	Rangos IP y ASN de una organización
+recon	help	cdncheck	cdncheck -h	Detección de CDN, WAF y proveedor cloud
+recon	help	tlsx	tlsx -h	Certificados TLS y nombres asociados
+recon	help	metabigor	metabigor -h	IPs, ASN y organización desde fuentes abiertas
+recon	help	dnsrecon	dnsrecon -h	Enumeración DNS
+recon	help	dnsenum	dnsenum -h	Enumeración DNS y transferencias de zona
+recon	help	fierce	fierce -h	Localización de espacio IP y nombres de host
+recon	help	Sublist3r	sublist3r -h	Subdominios desde buscadores
+recon	help	dnstwist	dnstwist -h	Dominios de typosquatting y phishing
+recon	help	WhatWeb	whatweb -h	Huella tecnológica de sitios web
+recon	help	wafw00f	wafw00f -h	Identificación de WAF
+recon	help	Nmap	nmap -h	Verificación puntual de puertos y servicios
+recon	help	masscan	masscan --help	Escaneo rápido de puertos (uso puntual y autorizado)
+recon	help	gowitness	gowitness -h	Capturas de pantalla masivas de sitios web
+recon	help	Shodan CLI	shodan -h	Buscador de dispositivos expuestos (clave API)
+recon	help	Censys CLI	censys -h	Buscador de hosts y certificados (clave API)
+recon	help	ZoomEye CLI	zoomeye -h	Buscador de dispositivos expuestos (clave API)
+recon	help	whois	whois --help	Registro de dominios e IPs
+recon	help	dig	dig -h	Consultas DNS
+recon	help	mtr	mtr -h	Traza de red y latencia
+
+people	help	Sherlock	sherlock --help	Nombres de usuario en cientos de sitios
+people	help	Maigret	maigret --help	Perfiles por nombre de usuario con extracción de datos
+people	help	Holehe	holehe --help	Servicios donde está registrado un correo
+people	help	socialscan	socialscan --help	Disponibilidad de correos y usuarios en plataformas
+people	help	GHunt	ghunt --help	Investigación de cuentas Google
+people	help	h8mail	h8mail -h	Correos en filtraciones y volcados
+people	help	emailrep	emailrep --help	Reputación de direcciones de correo
+people	help	bbot	bbot --help	OSINT recursivo modular
+people	help	PhoneInfoga	phoneinfoga --help	Información sobre números de teléfono
+people	help	ignorant	ignorant --help	Servicios donde está registrado un teléfono
+people	help	Telegram phone checker	telegram-phone-number-checker --help	Cuentas de Telegram asociadas a un número
+people	help	toutatis	toutatis --help	Información de cuentas de Instagram
+people	help	Instaloader	instaloader --help	Descarga y archivado de perfiles de Instagram
+people	help	xeuledoc	xeuledoc --help	Metadatos de documentos públicos de Google
+people	help	socid-extractor	socid_extractor --help	Datos de perfil a partir de URLs de redes sociales
+people	help	CrossLinked	crosslinked -h	Empleados de una organización desde buscadores
+people	help	gallery-dl	gallery-dl --help	Descarga de galerías e imágenes
+people	help	yt-dlp	yt-dlp --help	Descarga y archivado de vídeo
+people	help	auto-archiver	auto-archiver --help	Archivado forense de publicaciones (Bellingcat)
+people	help	waybackpy	waybackpy --help	Guardar y consultar capturas en Wayback Machine
+
+files	help	ExifTool	exiftool	Metadatos de imagen, vídeo y documentos
+files	help	exiv2	exiv2 --help	Metadatos EXIF, IPTC y XMP
+files	help	MediaInfo	mediainfo --help	Metadatos técnicos de audio y vídeo
+files	help	mat2	mat2 --help	Limpieza de metadatos antes de compartir
+files	help	Tesseract OCR	tesseract --help	Reconocimiento de texto en imágenes (es, en)
+files	help	pdfid	pdfid --help	Triaje de PDF sospechosos
+files	help	pdfgrep	pdfgrep --help	Búsqueda de texto en PDF
+files	help	olevba	olevba --help	Macros en documentos Office
+files	help	oleid	oleid --help	Indicadores de riesgo en documentos Office
+files	help	binwalk	binwalk --help	Análisis y extracción de firmware y ficheros
+files	help	foremost	foremost -h	Recuperación de ficheros por firmas (carving)
+files	term	PhotoRec	photorec	Recuperación de ficheros borrados
+files	help	stegseek	stegseek --help	Detección de esteganografía (steghide)
+files	help	zbarimg	zbarimg --help	Lectura de códigos QR y de barras
+files	desktop	GIMP	gimp.desktop	Edición y mejora de imagen
+files	desktop	Loupe	org.gnome.Loupe.desktop	Visor de imágenes
+files	desktop	Papers	org.gnome.Papers.desktop	Visor de PDF
+
+cti	help	capa	capa -h	Capacidades de binarios y documentos
+cti	help	YARA	yara --help	Reglas de detección
+cti	help	ClamAV	clamscan --help	Antivirus (actualiza firmas con freshclam)
+cti	help	ssdeep	ssdeep -h	Hashes difusos
+cti	help	sigma-cli	sigma --help	Conversión de reglas Sigma
+cti	help	attackcti	attackcti --help	Consulta de MITRE ATT&CK
+cti	help	iocextract	iocextract --help	Extracción de IOCs de texto
+cti	help	vt-cli	vt -h	VirusTotal desde la terminal (clave API)
+cti	help	GreyNoise	greynoise --help	Reputación de IPs (clave API)
+cti	help	gitleaks	gitleaks --help	Secretos expuestos en repositorios
+cti	help	TruffleHog	trufflehog --help	Credenciales filtradas en repositorios y ficheros
+cti	term	JupyterLab (CTI)	jupyter lab	Notebooks con el kernel Python (CTI)
+cti	term	Python (CTI)	cti-python	Intérprete con stix2, pymisp, pycti, vt-py y pandas
+cti	desktop	Navegador SQLite	sqlitebrowser.desktop	Inspección de bases de datos SQLite
+cti	desktop	Wireshark	org.wireshark.Wireshark.desktop	Análisis de capturas de red
+
+opsec	help	cti-netcheck	cti-netcheck	Comprobación de IP pública, Tor, DNS y MAC
+opsec	desktop	Tor Browser	torbrowser.desktop	Navegación anónima por Tor
+opsec	desktop	OnionShare	org.onionshare.OnionShare.desktop	Compartir ficheros vía Tor
+opsec	desktop	OpenSnitch	opensnitch_ui.desktop	Cortafuegos de aplicaciones (sudo systemctl start opensnitch)
+opsec	desktop	KeePassXC	org.keepassxc.KeePassXC.desktop	Credenciales y claves API
+opsec	desktop	Discos	org.gnome.DiskUtility.desktop	Volúmenes cifrados LUKS
+opsec	desktop	BleachBit	org.bleachbit.BleachBit.desktop	Limpieza de rastros
+opsec	help	macchanger	macchanger --help	Cambio manual de dirección MAC
+opsec	help	proxychains4	proxychains4	Encadenar proxies y Tor para cualquier comando
+opsec	help	Firejail	firejail --help	Abrir aplicaciones en un entorno confinado
+opsec	help	age	age --help	Cifrado moderno de ficheros
+
+evidence	help	cti-evidence	cti-evidence	Registrar un fichero como evidencia (hash + tiempo)
+evidence	desktop	CherryTree	cherrytree.desktop	Notas jerárquicas por caso
+evidence	desktop	LibreOffice Writer	libreoffice-writer.desktop	Informes
+evidence	desktop	LibreOffice Calc	libreoffice-calc.desktop	Hojas de cálculo y matrices
+evidence	help	pandoc	pandoc --help	Markdown a PDF, DOCX y HTML
+evidence	desktop	Editor de texto	org.gnome.TextEditor.desktop	Notas rápidas y Markdown
+evidence	desktop	Meld	org.gnome.Meld.desktop	Comparación de ficheros y carpetas
+evidence	help	cti-smoke-test	cti-smoke-test	Comprobar que las herramientas están instaladas
+
+platforms	term	Descargar plataformas	sudo /opt/cti/stacks/fetch-stacks.sh	Clona OpenCTI, MISP, ATT&CK Navigator y SpiderFoot (requiere Docker)
+platforms	url	OpenCTI	http://localhost:8080	Plataforma de conocimiento CTI (docker compose en /opt/cti/stacks/opencti)
+platforms	url	MISP	https://localhost	Compartición de indicadores (docker compose en /opt/cti/stacks/misp)
+platforms	url	ATT&CK Navigator	http://localhost:4200	Mapas de técnicas ATT&CK
+platforms	url	SpiderFoot	http://127.0.0.1:5001	Automatización OSINT con interfaz web
