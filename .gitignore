@@ -22,3 +22,5 @@ live-build/config/build
 tools/stacks/*/
 !tools/stacks/README.md
 !tools/stacks/fetch-stacks.sh
+# ISOs descargadas o construidas localmente
+iso/
