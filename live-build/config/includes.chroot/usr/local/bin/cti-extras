@@ -1,0 +1,27 @@
+#!/bin/sh
+# Aplicaciones adicionales que no van en la ISO (licencia no libre o sin paquete Debian),
+# instalables bajo demanda desde Flathub con sandbox de Flatpak.
+# Uso: cti-extras            lista las aplicaciones sugeridas
+#      cti-extras install ID [ID...]   instala una o varias
+#      cti-extras all        instala todas las sugeridas
+set -eu
+APPS="md.obsidian.Obsidian|Obsidian|Notas en Markdown con grafo (freeware)
+com.logseq.Logseq|Logseq|Notas y base de conocimiento (AGPL)
+org.signal.Signal|Signal|Mensajería cifrada para coordinación de incidentes
+im.riot.Riot|Element|Cliente Matrix (salas cifradas de equipo)
+com.jgraph.drawio.desktop|draw.io|Diagramas de arquitectura y flujos
+org.zotero.Zotero|Zotero|Gestión de referencias y fuentes
+com.github.tchx84.Flatseal|Flatseal|Permisos de las aplicaciones Flatpak
+org.mozilla.Thunderbird|Thunderbird (Flatpak)|Alternativa aislada al paquete Debian"
+
+list() {
+    echo "Aplicaciones sugeridas (flatpak install flathub <ID>):"
+    printf '%s\n' "$APPS" | while IFS='|' read -r id name desc; do printf '  %-32s %-22s %s\n' "$id" "$name" "$desc"; done
+}
+case "${1:-list}" in
+    list|-h|--help) list ;;
+    install) shift; [ $# -ge 1 ] || { echo "Uso: cti-extras install ID [ID...]" >&2; exit 1; }
+        flatpak install -y flathub "$@" ;;
+    all) printf '%s\n' "$APPS" | cut -d'|' -f1 | xargs flatpak install -y flathub ;;
+    *) echo "Uso: cti-extras [list|install ID...|all]" >&2; exit 1 ;;
+esac

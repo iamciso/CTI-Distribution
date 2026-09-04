@@ -1,0 +1,56 @@
+#!/bin/sh
+# Gestiona las claves API de los servicios de inteligencia en ~/.config/cti/keys.env (modo 0600)
+# y las exporta como variables de entorno que entienden las herramientas (Shodan, VirusTotal,
+# Censys, GreyNoise, AlienVault OTX, ZoomEye, Hunter, HIBP, urlscan, MISP, OpenCTI).
+# Uso:
+#   cti-keys                 lista las claves configuradas (valores ocultos)
+#   cti-keys set NOMBRE      pide el valor sin eco y lo guarda
+#   cti-keys unset NOMBRE    elimina la clave
+#   cti-keys export          imprime "export ..." para hacer: eval "$(cti-keys export)"
+#   cti-keys edit            abre el fichero en el editor
+# El fichero se carga automáticamente en cada shell (/etc/profile.d/cti-keys.sh).
+set -eu
+FILE="${XDG_CONFIG_HOME:-$HOME/.config}/cti/keys.env"
+KNOWN="SHODAN_API_KEY VTCLI_APIKEY VT_API_KEY CENSYS_API_ID CENSYS_API_SECRET GREYNOISE_API_KEY OTX_API_KEY ZOOMEYE_API_KEY HUNTER_API_KEY HIBP_API_KEY URLSCAN_API_KEY MISP_URL MISP_KEY OPENCTI_URL OPENCTI_TOKEN GITHUB_TOKEN"
+
+ensure() { mkdir -p "$(dirname "$FILE")"; [ -f "$FILE" ] || : > "$FILE"; chmod 0600 "$FILE"; }
+
+case "${1:-list}" in
+    list)
+        ensure
+        echo "Claves en $FILE:"
+        for k in $KNOWN; do
+            if grep -q "^$k=" "$FILE"; then printf '  %-20s configurada\n' "$k"; else printf '  %-20s -\n' "$k"; fi
+        done
+        echo "Otras variables del fichero:"; grep -vE '^\s*(#|$)' "$FILE" | cut -d= -f1 | grep -vxF "$(for k in $KNOWN; do printf '%s\n' "$k"; done)" | sed 's/^/  /' || true
+        ;;
+    set)
+        [ $# -ge 2 ] || { echo "Uso: cti-keys set NOMBRE" >&2; exit 1; }
+        ensure; name=$2
+        printf 'Valor de %s (no se muestra): ' "$name"
+        stty -echo 2>/dev/null || true; read -r value; stty echo 2>/dev/null || true; echo
+        grep -v "^$name=" "$FILE" > "$FILE.tmp" || true
+        printf '%s=%s\n' "$name" "$value" >> "$FILE.tmp"
+        mv "$FILE.tmp" "$FILE"; chmod 0600 "$FILE"
+        echo "Guardada. Abre un shell nuevo o ejecuta: eval \"\$(cti-keys export)\""
+        ;;
+    unset)
+        [ $# -ge 2 ] || { echo "Uso: cti-keys unset NOMBRE" >&2; exit 1; }
+        ensure; grep -v "^$2=" "$FILE" > "$FILE.tmp" || true; mv "$FILE.tmp" "$FILE"; chmod 0600 "$FILE"
+        ;;
+    export)
+        ensure
+        grep -vE '^\s*(#|$)' "$FILE" | while IFS= read -r line; do
+            printf "export %s='%s'\n" "${line%%=*}" "$(printf '%s' "${line#*=}" | sed "s/'/'\\\\''/g")"
+        done
+        ;;
+    edit)
+        ensure; "${EDITOR:-nano}" "$FILE"; chmod 0600 "$FILE"
+        ;;
+    -h|--help|help)
+        sed -n '2,12p' "$0" | sed 's/^# \{0,1\}//'
+        ;;
+    *)
+        echo "Uso: cti-keys [list|set NOMBRE|unset NOMBRE|export|edit]" >&2; exit 1
+        ;;
+esac

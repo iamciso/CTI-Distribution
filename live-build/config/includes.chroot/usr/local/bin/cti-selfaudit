@@ -1,0 +1,40 @@
+#!/bin/sh
+# Autoauditoría de esta estación (o de un sistema instalado con CTI Distribution):
+# Lynis (hardening) y OpenSCAP con la guía SSG de Debian. Genera informes en ~/Audit/<fecha>/.
+# Uso: sudo cti-selfaudit [--profile PERFIL] [--quick]
+#   PERFIL por defecto: xccdf_org.ssgproject.content_profile_anssi_bp28_intermediary
+#   Otros: oscap info /usr/share/xml/scap/ssg/content/ssg-debian12-ds.xml
+set -eu
+PROFILE=xccdf_org.ssgproject.content_profile_anssi_bp28_intermediary
+QUICK=""
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --profile) PROFILE=$2; shift ;;
+        --quick) QUICK="--quick" ;;
+        -h|--help) sed -n '2,6p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+        *) echo "Opción desconocida: $1" >&2; exit 1 ;;
+    esac
+    shift
+done
+[ "$(id -u)" -eq 0 ] || { echo "Ejecuta con sudo: sudo cti-selfaudit" >&2; exit 1; }
+
+OWNER=${SUDO_USER:-root}
+HOMEDIR=$(getent passwd "$OWNER" | cut -d: -f6)
+OUT="$HOMEDIR/Audit/$(date -u +%Y%m%d-%H%M%S)"
+mkdir -p "$OUT"
+
+echo "== Lynis =="
+lynis audit system --no-colors $QUICK --logfile "$OUT/lynis.log" --report-file "$OUT/lynis-report.dat" > "$OUT/lynis.txt" 2>&1 || true
+grep -E 'Hardening index|Tests performed|Suggestions' "$OUT/lynis.txt" | sed 's/^/   /' || true
+
+# La guía SSG para Debian 13 aún no existe en trixie: se usa la de Debian 12 (misma base).
+DS=$(find /usr/share/xml/scap/ssg/content -name 'ssg-debian1[3-9]-ds.xml' 2>/dev/null | sort | tail -n 1)
+[ -n "$DS" ] || DS=/usr/share/xml/scap/ssg/content/ssg-debian12-ds.xml
+echo "== OpenSCAP ($PROFILE) =="
+oscap xccdf eval --profile "$PROFILE" --results "$OUT/oscap-results.xml" --report "$OUT/oscap-report.html" "$DS" > "$OUT/oscap.txt" 2>&1 || true
+passed=$(grep -c 'Result.*pass' "$OUT/oscap.txt" || true)
+failed=$(grep -c 'Result.*fail' "$OUT/oscap.txt" || true)
+echo "   reglas superadas: $passed, fallidas: $failed (informe: $OUT/oscap-report.html)"
+
+chown -R "$OWNER" "$HOMEDIR/Audit"
+echo "Informes en $OUT"

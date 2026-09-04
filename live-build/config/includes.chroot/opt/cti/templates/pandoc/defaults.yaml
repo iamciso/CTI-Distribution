@@ -1,0 +1,21 @@
+# Estilo por defecto de cti-report (pandoc --defaults). Tipografías del sistema (Inter, DejaVu).
+from: markdown+yaml_metadata_block+pipe_tables
+standalone: true
+toc: false
+number-sections: true
+variables:
+  lang: es-ES
+  mainfont: Inter
+  sansfont: Inter
+  monofont: DejaVu Sans Mono
+  fontsize: 11pt
+  geometry: margin=2.2cm
+  colorlinks: true
+  linkcolor: NavyBlue
+  urlcolor: NavyBlue
+  header-includes:
+    - \usepackage{fancyhdr}
+    - \pagestyle{fancy}
+    - \fancyhead[L]{\small\textbf{$title$}}
+    - \fancyhead[R]{\small $tlp$}
+    - \fancyfoot[C]{\small Página \thepage}

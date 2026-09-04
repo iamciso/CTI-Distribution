@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=CTI Distribution: bienvenida
+Comment=Guía rápida en el primer inicio de sesión
+Exec=cti-welcome
+Terminal=false
+NoDisplay=true
+OnlyShowIn=GNOME;
+X-GNOME-Autostart-Delay=8

@@ -1,26 +1,81 @@
 #!/bin/sh
-# Registra un fichero como evidencia: hash SHA-256, marca de tiempo UTC y nota.
-# Uso: cti-evidence <fichero> [nota]
-# El registro se acumula en ~/Evidence/manifest.csv
+# Registra evidencias con cadena de custodia: hash SHA-256, marca de tiempo UTC, analista, nota y,
+# si está disponible, sello de tiempo externo con OpenTimestamps (fichero .ots junto a la evidencia).
+# Uso:
+#   cti-evidence <fichero> [nota]        registra un fichero existente
+#   cti-evidence url <URL> [nota]        captura una página (PNG, PDF, HTML y WARC) y la registra
+#   cti-evidence verify <fichero>        comprueba el hash frente al manifiesto y el sello .ots
+# Variables: CTI_EVIDENCE_DIR (por defecto ~/Evidence), CTI_NO_OTS=1 para no sellar.
+# El registro se acumula en $CTI_EVIDENCE_DIR/manifest.csv
 set -eu
 
-[ $# -ge 1 ] || { echo "Uso: cti-evidence <fichero> [nota]" >&2; exit 1; }
-file=$1
-note=${2:-}
-[ -f "$file" ] || { echo "No existe: $file" >&2; exit 1; }
-
-dir="$HOME/Evidence"
+dir="${CTI_EVIDENCE_DIR:-$HOME/Evidence}"
 manifest="$dir/manifest.csv"
 mkdir -p "$dir"
-[ -f "$manifest" ] || echo "timestamp_utc,sha256,size_bytes,path,host,analyst,note" > "$manifest"
+[ -f "$manifest" ] || echo "timestamp_utc,sha256,size_bytes,path,host,analyst,note,ots" > "$manifest"
 
-ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-sha=$(sha256sum "$file" | awk '{print $1}')
-size=$(stat -c %s "$file")
-abs=$(realpath "$file")
-note_esc=$(printf '%s' "$note" | sed 's/"/""/g')
+usage() { sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 1; }
 
-printf '%s,%s,%s,"%s",%s,%s,"%s"\n' "$ts" "$sha" "$size" "$abs" "$(hostname)" "$(id -un)" "$note_esc" >> "$manifest"
-echo "Registrado: $abs"
-echo "SHA-256   : $sha"
-echo "Manifiesto: $manifest"
+stamp() {
+    # Sello de tiempo externo (OpenTimestamps): crea <fichero>.ots; requiere red. No bloquea si falla.
+    [ "${CTI_NO_OTS:-0}" = "1" ] && { echo "no"; return; }
+    command -v ots >/dev/null 2>&1 || { echo "no"; return; }
+    if ots stamp "$1" >/dev/null 2>&1 && [ -f "$1.ots" ]; then echo "si"; else echo "fallo"; fi
+}
+
+register() {
+    file=$1; note=${2:-}
+    [ -f "$file" ] || { echo "No existe: $file" >&2; exit 1; }
+    ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+    sha=$(sha256sum "$file" | awk '{print $1}')
+    size=$(stat -c %s "$file")
+    abs=$(realpath "$file")
+    note_esc=$(printf '%s' "$note" | sed 's/"/""/g')
+    ots=$(stamp "$abs")
+    printf '%s,%s,%s,"%s",%s,%s,"%s",%s\n' "$ts" "$sha" "$size" "$abs" "$(hostname)" "$(id -un)" "$note_esc" "$ots" >> "$manifest"
+    echo "Registrado: $abs"
+    echo "SHA-256   : $sha"
+    echo "Sello OTS : $ots"
+    echo "Manifiesto: $manifest"
+}
+
+capture_url() {
+    url=$1; note=${2:-}
+    host=$(printf '%s' "$url" | sed -E 's#^[a-z]+://##; s#[/?].*##; s#[^A-Za-z0-9.-]#_#g')
+    case="$dir/$(date -u +%Y%m%d-%H%M%S)-$host"
+    mkdir -p "$case"
+    echo "Capturando $url en $case"
+    printf '%s\n' "$url" > "$case/url.txt"
+    if command -v chromium >/dev/null 2>&1; then
+        chromium --headless=new --no-sandbox --disable-gpu --hide-scrollbars --window-size=1440,2400 \
+            --screenshot="$case/page.png" "$url" >/dev/null 2>&1 || echo "  (captura PNG fallida)" >&2
+        chromium --headless=new --no-sandbox --disable-gpu --print-to-pdf="$case/page.pdf" \
+            --no-pdf-header-footer "$url" >/dev/null 2>&1 || echo "  (PDF fallido)" >&2
+    fi
+    wget -q --timeout=30 --tries=2 --warc-file="$case/page" -O "$case/page.html" "$url" \
+        || echo "  (descarga HTML/WARC fallida)" >&2
+    for f in "$case"/url.txt "$case"/page.png "$case"/page.pdf "$case"/page.html "$case"/page.warc.gz; do
+        [ -f "$f" ] && register "$f" "$note"
+    done
+}
+
+verify() {
+    file=$1
+    abs=$(realpath "$file")
+    sha=$(sha256sum "$file" | awk '{print $1}')
+    line=$(grep -F "\"$abs\"" "$manifest" | tail -n 1 || true)
+    [ -n "$line" ] || { echo "No está en el manifiesto: $abs" >&2; exit 1; }
+    reg=$(printf '%s' "$line" | cut -d, -f2)
+    if [ "$reg" = "$sha" ]; then echo "Hash correcto: $sha"; else echo "HASH DISTINTO: manifiesto $reg, actual $sha" >&2; exit 2; fi
+    if [ -f "$abs.ots" ] && command -v ots >/dev/null 2>&1; then
+        ots verify "$abs.ots" 2>&1 | sed 's/^/  OTS: /' || true
+    fi
+}
+
+case "${1:-}" in
+    "") usage ;;
+    -h|--help) usage ;;
+    url) [ $# -ge 2 ] || usage; capture_url "$2" "${3:-}" ;;
+    verify) [ $# -ge 2 ] || usage; verify "$2" ;;
+    *) register "$1" "${2:-}" ;;
+esac

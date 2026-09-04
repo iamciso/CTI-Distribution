@@ -1,0 +1,36 @@
+#!/bin/sh
+# Descarga (o actualiza) catálogos públicos de referencia para análisis y gobernanza en
+# ~/cti-data (o el directorio indicado). No se incluyen en la ISO para que estén siempre al día.
+# Uso: cti-feeds [directorio]        cti-feeds --list
+set -eu
+DEST=${1:-$HOME/cti-data}
+[ "${1:-}" = "--list" ] && { sed -n '/^FEEDS=/,/^"/p' "$0" | grep -E '^[a-z]' | cut -d'|' -f1,3; exit 0; }
+[ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ] && { sed -n '2,5p' "$0" | sed 's/^# \{0,1\}//'; exit 0; }
+
+# nombre|url|descripcion
+FEEDS="attack-enterprise.json|https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json|MITRE ATT&CK Enterprise (STIX 2.1)
+attack-mobile.json|https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/mobile-attack/mobile-attack.json|MITRE ATT&CK Mobile (STIX 2.1)
+attack-ics.json|https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/ics-attack/ics-attack.json|MITRE ATT&CK ICS (STIX 2.1)
+d3fend.json|https://d3fend.mitre.org/ontologies/d3fend.json|MITRE D3FEND (ontología de contramedidas)
+capec.xml|https://capec.mitre.org/data/xml/capec_latest.xml|MITRE CAPEC (patrones de ataque)
+cwe.zip|https://cwe.mitre.org/data/xml/cwec_latest.xml.zip|MITRE CWE (debilidades de software)
+cisa-kev.json|https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json|CISA Known Exploited Vulnerabilities
+epss.csv.gz|https://epss.cyentia.com/epss_scores-current.csv.gz|FIRST EPSS (probabilidad de explotación)
+nist-csf-2.0.json|https://csrc.nist.gov/extensions/nudp/services/json/csf/export-json?olirIds=all|NIST Cybersecurity Framework 2.0 (JSON)
+nist-800-53-r5.json|https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_catalog.json|NIST SP 800-53 rev5 (OSCAL)
+threatfox-iocs.json|https://threatfox.abuse.ch/export/json/recent/|abuse.ch ThreatFox (IOCs recientes)
+urlhaus-online.csv|https://urlhaus.abuse.ch/downloads/csv_online/|abuse.ch URLhaus (URLs maliciosas activas)
+tlp-2.0.txt|https://www.first.org/tlp/docs/tlp-v2.txt|FIRST TLP 2.0 (etiquetado de compartición)"
+
+mkdir -p "$DEST"
+printf 'Descargando catálogos en %s\n' "$DEST"
+printf '%s\n' "$FEEDS" | while IFS='|' read -r name url desc; do
+    printf '  %-24s %s ... ' "$name" "$desc"
+    if curl -fsSL --retry 2 --max-time 300 -o "$DEST/$name.part" "$url"; then
+        mv "$DEST/$name.part" "$DEST/$name"; echo "ok ($(du -h "$DEST/$name" | cut -f1))"
+    else
+        rm -f "$DEST/$name.part"; echo "FALLO"
+    fi
+done
+date -u +%Y-%m-%dT%H:%M:%SZ > "$DEST/.updated"
+echo "Hecho. Última actualización: $(cat "$DEST/.updated")"

@@ -1,0 +1,45 @@
+#!/bin/sh
+# Plantillas de informes y documentos de gobernanza (Markdown) y conversión a PDF, DOCX o HTML
+# con pandoc y el estilo de /opt/cti/templates/pandoc.
+# Uso:
+#   cti-report list                         plantillas disponibles
+#   cti-report new <plantilla> [destino.md] crea un documento a partir de la plantilla
+#   cti-report build <fichero.md> [pdf|docx|html]   genera el documento (pdf por defecto)
+# Etiqueta TLP/PAP y metadatos en el encabezado YAML de cada plantilla.
+set -eu
+TPL=/opt/cti/templates
+PANDOC_DEFAULTS=$TPL/pandoc/defaults.yaml
+
+case "${1:-help}" in
+    list)
+        echo "Plantillas en $TPL:"
+        for f in "$TPL"/*.md; do
+            printf '  %-28s %s\n' "$(basename "$f" .md)" "$(sed -n 's/^title: *//p' "$f" | head -n 1 | tr -d '"')"
+        done
+        ;;
+    new)
+        [ $# -ge 2 ] || { echo "Uso: cti-report new <plantilla> [destino.md]" >&2; exit 1; }
+        src="$TPL/$2.md"; [ -f "$src" ] || { echo "No existe la plantilla $2 (cti-report list)" >&2; exit 1; }
+        dest=${3:-$(date +%Y-%m-%d)-$2.md}
+        [ -e "$dest" ] && { echo "Ya existe: $dest" >&2; exit 1; }
+        sed "s/{{FECHA}}/$(date +%Y-%m-%d)/g; s/{{ANALISTA}}/$(id -un)/g" "$src" > "$dest"
+        echo "Creado $dest (edítalo y luego: cti-report build $dest)"
+        ;;
+    build)
+        [ $# -ge 2 ] || { echo "Uso: cti-report build <fichero.md> [pdf|docx|html]" >&2; exit 1; }
+        src=$2; fmt=${3:-pdf}; out="${src%.md}.$fmt"
+        case "$fmt" in
+            pdf)  pandoc --defaults "$PANDOC_DEFAULTS" --pdf-engine=xelatex -o "$out" "$src" ;;
+            docx) pandoc --defaults "$PANDOC_DEFAULTS" -o "$out" "$src" ;;
+            html) pandoc --defaults "$PANDOC_DEFAULTS" --standalone --embed-resources -o "$out" "$src" ;;
+            *) echo "Formato no soportado: $fmt (pdf|docx|html)" >&2; exit 1 ;;
+        esac
+        echo "Generado $out"
+        ;;
+    help|-h|--help)
+        sed -n '2,8p' "$0" | sed 's/^# \{0,1\}//'
+        ;;
+    *)
+        echo "Uso: cti-report [list|new <plantilla> [destino]|build <fichero.md> [pdf|docx|html]]" >&2; exit 1
+        ;;
+esac

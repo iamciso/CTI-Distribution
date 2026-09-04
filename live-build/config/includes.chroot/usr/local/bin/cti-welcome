@@ -1,0 +1,15 @@
+#!/bin/sh
+# Aviso de bienvenida en el primer inicio de sesión gráfico: dónde está la guía, cómo configurar
+# claves API y qué comprobar antes de investigar. Se lanza desde /etc/xdg/autostart y no vuelve a
+# mostrarse cuando existe ~/.config/cti/welcomed (con persistencia o en un sistema instalado).
+set -u
+flag="${XDG_CONFIG_HOME:-$HOME/.config}/cti/welcomed"
+[ -e "$flag" ] && exit 0
+mkdir -p "$(dirname "$flag")"
+command -v zenity >/dev/null 2>&1 || exit 0
+if zenity --question --width=520 --title="CTI Distribution" --ok-label="Abrir guía rápida" --cancel-label="Cerrar" \
+    --text="<b>Bienvenido a CTI Distribution</b>\n\nAntes de investigar:\n  1. <tt>cti-netcheck</tt>: IP pública, Tor, DNS y MAC.\n  2. <tt>cti-keys set NOMBRE</tt>: claves API (Shodan, VirusTotal, Censys...).\n  3. <tt>cti-feeds</tt>: catálogos ATT&amp;CK, KEV, EPSS, NIST.\n\nLas herramientas están en el menú por categorías (1. Reconocimiento ... 8. Gobernanza).\nGuía completa: <tt>~/README-ctidistro.txt</tt>. Comprobación: <tt>cti-smoke-test</tt>." 2>/dev/null; then
+    xdg-open "$HOME/README-ctidistro.txt" >/dev/null 2>&1 &
+fi
+touch "$flag"
+exit 0
