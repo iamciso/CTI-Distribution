@@ -1,0 +1,5 @@
+#!/bin/sh
+# Python del entorno /opt/cti/venv (stix2, pymisp, taxii2-client, pandas...).
+# Es un script y no un enlace simbólico: Python localiza el venv por la ruta con la que se le
+# invoca, y un enlace en /usr/local/bin arrancaría el intérprete del sistema sin las librerías.
+exec /opt/cti/venv/bin/python "$@"

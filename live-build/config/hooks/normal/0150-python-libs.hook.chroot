@@ -19,6 +19,7 @@ done
 
 "$VENV/bin/python" -m ipykernel install --name cti --display-name "Python (CTI)"
 
-# Acceso directo: "cti-python" abre el intérprete con las librerías cargadas
-ln -sf "$VENV/bin/python" /usr/local/bin/cti-python
+# El lanzador /usr/local/bin/cti-python (includes.chroot) ejecuta $VENV/bin/python. No puede ser
+# un enlace simbólico: Python busca pyvenv.cfg junto a la ruta con la que se le invoca, y un
+# enlace en /usr/local/bin arrancaría el intérprete del sistema sin las librerías del venv.
 rm -rf /root/.cache/pip
