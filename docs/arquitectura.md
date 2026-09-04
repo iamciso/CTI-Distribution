@@ -62,7 +62,7 @@ configuración que live-config escribe al arrancar), así que **al cambiar de ve
 recrear el volumen** o el sistema nuevo arrancará con ficheros de sistema antiguos (por ejemplo, GDM falla
 porque falta el usuario `Debian-gdm`). Para conservar solo los datos entre versiones usa `/home union`
 (casos, claves API, evidencias) y deja el sistema en modo amnésico.
-| Instalado | Instalador de Debian incluido en el menú de arranque | Estación de trabajo fija o máquina virtual |
+| Instalado | Calamares desde la sesión en vivo (menú 8. Gobernanza > Instalar en disco), con cifrado LUKS; también el instalador de Debian en texto desde el menú de arranque | Estación de trabajo fija o máquina virtual. Requiere un disco de al menos 15 GB (recomendado 40 GB) y 4 GB de RAM |
 
 ## Convenciones
 
