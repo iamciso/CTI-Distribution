@@ -28,7 +28,7 @@ jobs:
     container: debian:trixie
     steps:
       - uses: actions/checkout@v4
-      - run: apt-get update -qq && apt-get install -y -qq live-build
+      - run: apt-get update -qq && apt-get install -y -qq live-build python3
       - name: Generar configuración
         working-directory: live-build
         run: lb config && ls config/

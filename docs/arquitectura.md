@@ -39,6 +39,7 @@ puede eliminar o sustituir una capa sin tocar las demás.
 3. `lb chroot`: instala las listas de paquetes, copia `includes.chroot/` sobre el sistema y ejecuta los
    hooks en orden numérico:
    - `0100` instala herramientas Python con pipx.
+   - `0150` crea `/opt/cti/venv` con librerías CTI (stix2, pymisp) y un kernel de Jupyter.
    - `0200` compila herramientas Go.
    - `0300` habilita/deshabilita servicios, grupos del usuario, permisos.
 4. `lb binary` genera el squashfs, el cargador de arranque y la ISO híbrida (BIOS + UEFI, grabable en USB).

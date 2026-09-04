@@ -13,4 +13,8 @@ Plataformas (requieren Docker: sudo systemctl start docker):
   /opt/cti/stacks/           OpenCTI, MISP, ATT&CK Navigator via docker compose.
 
 Herramientas que fallaron durante la construccion de la imagen (si las hay):
-  /opt/cti/manifests/pipx-failed.txt  /opt/cti/manifests/go-failed.txt
+  /opt/cti/manifests/*-failed.txt
+
+Scripting y notebooks:
+  cti-python                 Python con stix2, pymisp, taxii2-client, pandas...
+  jupyter notebook           Kernel "Python (CTI)"

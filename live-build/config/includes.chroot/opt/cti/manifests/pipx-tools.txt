@@ -1,6 +1,8 @@
 # Una herramienta por línea. Formato: <paquete-pypi>[==version]
 # TODO (fase 1): fijar versiones una vez validado el build inicial.
 spiderfoot
+theHarvester
+oletools
 sherlock-project
 maigret
 holehe

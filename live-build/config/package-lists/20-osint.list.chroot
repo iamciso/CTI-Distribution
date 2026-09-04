@@ -1,13 +1,10 @@
 # OSINT: reconocimiento pasivo, redes sociales, metadatos y medios
-theharvester
 recon-ng
-amass
 sublist3r
 dnsrecon
 dnsenum
 fierce
 dnstwist
-metagoofil
 whatweb
 wafw00f
 whois

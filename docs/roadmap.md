@@ -9,7 +9,7 @@
 
 ## Fase 1 - Primera ISO reproducible
 
-- [ ] CI en verde: todos los paquetes existen en trixie (corregir los que fallen).
+- [x] CI en verde: todos los paquetes existen en trixie.
 - [ ] Primer build completo con `workflow_dispatch`; revisar `pipx-failed.txt` y `go-failed.txt`.
 - [ ] Arranque en QEMU/VirtualBox: escritorio, red, `cti-netcheck`, `tests/smoke-test.sh`.
 - [ ] Fijar versiones en `pipx-tools.txt` y `go-tools.txt`.

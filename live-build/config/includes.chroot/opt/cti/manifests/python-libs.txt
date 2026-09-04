@@ -1,0 +1,6 @@
+# Librerías Python para scripting y notebooks, instaladas en /opt/cti/venv
+# (venv con acceso a los paquetes del sistema: pandas, networkx, yara, shodan...).
+# Formato: <paquete-pypi>[==version]
+stix2
+taxii2-client
+pymisp

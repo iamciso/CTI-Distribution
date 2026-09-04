@@ -1,5 +1,6 @@
 # Una herramienta por línea. Formato: <ruta-modulo>@<version>
 # TODO (fase 1): sustituir @latest por versiones fijas para builds reproducibles.
+github.com/owasp-amass/amass/v4/cmd/amass@latest
 github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 github.com/projectdiscovery/dnsx/cmd/dnsx@latest
 github.com/projectdiscovery/httpx/cmd/httpx@latest

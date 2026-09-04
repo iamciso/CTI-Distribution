@@ -1,16 +1,12 @@
 # CTI: formatos de intercambio, detección, triaje ligero de malware, análisis de datos
 yara
 python3-yara
-python3-stix2
-python3-taxii2-client
-python3-pymisp
 clamav
 clamav-freshclam
 ssdeep
 python3-ssdeep
 hashdeep
 binwalk
-python3-oletools
 pev
 radare2
 binutils

@@ -1,19 +1,20 @@
 # Catálogo de herramientas
 
 Origen: **deb** = archivo Debian trixie, **pipx** = PyPI en entorno aislado, **go** = compilado en el
-build, **docker** = desplegado bajo demanda. Criterio de inclusión: uso pasivo o de análisis,
+build, **venv** = librería en `/opt/cti/venv`, **docker** = desplegado bajo demanda. Criterio de inclusión: uso pasivo o de análisis,
 mantenida activamente, licencia compatible con la redistribución.
 
-Los nombres de paquete se validan automáticamente en CI (`tests/check-packages.sh`). Las
-herramientas marcadas con `(?)` requieren confirmación en el primer build.
+Los nombres de paquete se validan automáticamente en CI (`tests/check-packages.sh`). Los
+nombres ya han sido validados contra trixie: theHarvester, Amass, oletools, stix2, PyMISP y taxii2-client
+no están en Debian 13 y se instalan por pipx, Go o venv.
 
 ## Reconocimiento de infraestructura (pasivo)
 
 | Herramienta | Origen | Licencia | Notas |
 |---|---|---|---|
-| theHarvester | deb | GPL-2 | Correos, subdominios, IPs desde fuentes públicas |
+| theHarvester | pipx | GPL-2 | Correos, subdominios, IPs desde fuentes públicas |
 | recon-ng | deb | GPL-3 | Framework modular con claves API |
-| Amass | deb | Apache-2 | Enumeración de subdominios y mapeo de superficie |
+| Amass | go | Apache-2 | Enumeración de subdominios y mapeo de superficie |
 | Sublist3r | deb | GPL-2 | Subdominios desde buscadores |
 | subfinder, dnsx, httpx, katana | go | MIT | Cadena ProjectDiscovery: descubrimiento y verificación |
 | waybackurls, gau, assetfinder | go | MIT | URLs históricas y activos |
@@ -44,7 +45,6 @@ herramientas marcadas con `(?)` requieren confirmación en el primer build.
 |---|---|---|---|
 | ExifTool, exiv2, mediainfo | deb | Perl / GPL | Metadatos de imagen, vídeo y documentos |
 | mat2 | deb | LGPL-3 | Limpieza de metadatos antes de compartir |
-| metagoofil | deb | GPL-2 | Documentos públicos de un dominio |
 | Tesseract (es, en) | deb | Apache-2 | OCR |
 | GIMP, ImageMagick, ffmpeg | deb | GPL | Mejora y conversión de imagen y vídeo |
 | poppler-utils, pdfgrep, pdfid | deb / pipx | GPL / Public | Análisis de PDF |
@@ -53,14 +53,15 @@ herramientas marcadas con `(?)` requieren confirmación en el primer build.
 
 | Herramienta | Origen | Licencia | Notas |
 |---|---|---|---|
-| stix2, taxii2-client | deb | BSD-3 | Lectura y escritura STIX 2.1 / TAXII |
-| PyMISP | deb | BSD-2 | Cliente de MISP |
+| stix2, taxii2-client | venv | BSD-3 | Lectura y escritura STIX 2.1 / TAXII, en `/opt/cti/venv` (`cti-python`) |
+| PyMISP | venv | BSD-2 | Cliente de MISP, en `/opt/cti/venv` |
 | attackcti, mitreattack-python | pipx | BSD / Apache-2 | Consulta de ATT&CK |
 | sigma-cli | pipx | LGPL-2.1 | Conversión de reglas Sigma |
 | YARA | deb | BSD-3 | Reglas de detección |
 | capa | pipx | Apache-2 | Capacidades de binarios |
 | ClamAV, ssdeep, hashdeep | deb | GPL | Antivirus y hashes difusos |
-| binwalk, radare2, pev, oletools | deb | MIT / LGPL / BSD | Triaje ligero de ficheros y documentos |
+| binwalk, radare2, pev | deb | MIT / LGPL / BSD | Triaje ligero de ficheros y documentos |
+| oletools | pipx | BSD-2 | olevba, oleid, mraptor para documentos Office |
 | iocextract | pipx | GPL-2 | Extracción de IOCs de texto |
 | vt-cli | go | Apache-2 | VirusTotal desde la terminal |
 | Jupyter, pandas, networkx, graphviz | deb | BSD | Análisis de datos y grafos |
@@ -82,7 +83,7 @@ herramientas marcadas con `(?)` requieren confirmación en el primer build.
 | OpenSnitch | deb | GPL-3 | Cortafuegos de aplicaciones saliente |
 | OnionShare | deb | GPL-3 | Compartir ficheros vía Tor |
 | KeePassXC, age, GnuPG | deb | GPL / Apache-2 | Credenciales y cifrado |
-| zuluCrypt, cryptsetup | deb | GPL | Volúmenes cifrados |
+| Discos de GNOME, cryptsetup | deb | GPL | Volúmenes LUKS con interfaz gráfica y por consola |
 | BleachBit, secure-delete, USBGuard | deb | GPL | Limpieza y control de USB |
 
 ## Documentación y reporting
@@ -101,6 +102,7 @@ herramientas marcadas con `(?)` requieren confirmación en el primer build.
 | Maltego | Licencia propietaria; el usuario puede instalar Maltego CE por su cuenta |
 | Hunchly | Propietaria y de pago |
 | Metasploit, sqlmap, hydra, etc. | Fuera del alcance: explotación activa |
+| metagoofil, zuluCrypt | No están en Debian 13; cubiertos por theHarvester y Discos de GNOME |
 | twint, snscrape | Sin mantenimiento, rotas por cambios en las plataformas |
 | Obsidian, Joplin | No empaquetadas en Debian; candidatas vía Flatpak en fase 3 |
 | CyberChef | Candidata: descargar la release oficial en un hook (fase 2) |
