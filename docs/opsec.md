@@ -27,7 +27,11 @@ riesgos que la distribución debe reducir:
 | 2 | Multi-Account Containers para separar identidades; Tor Browser para la máxima separación | Firefox / torbrowser-launcher |
 | 4 | Firejail y AppArmor para abrir ficheros sospechosos; triaje con yara/oletools/capa antes de abrir | listas 30 y 40 |
 | 5 | Modo amnésico por defecto; persistencia solo cifrada con LUKS; zuluCrypt | `auto/config` |
-| 6 | `cti-evidence`: SHA-256, marca UTC, analista y nota en manifiesto CSV | `usr/local/bin/cti-evidence` |
+| 6 | `cti-evidence`: SHA-256, marca UTC, analista, nota, captura de páginas (PNG, PDF, HTML, WARC) y sello OpenTimestamps | `usr/local/bin/cti-evidence` |
+| 4, 5 | Hardening de la estación: sysctl restrictivo, auditd con reglas base, actualizaciones de seguridad automáticas, AppArmor, Secure Boot con shim firmado | `etc/sysctl.d`, `etc/audit/rules.d`, hook `0300`, `auto/config` |
+| 4 | USBGuard instalado pero apagado: su política generada en el build está vacía y bloquearía teclados y discos USB. Activar con `sudo usbguard generate-policy > /etc/usbguard/rules.conf && sudo systemctl enable --now usbguard` | hook `0300` |
+| 3 | `cti-selfaudit`: Lynis y OpenSCAP (perfil ANSSI BP-28) contra la propia estación, informe HTML en `~/Audit` | `usr/local/bin/cti-selfaudit` |
+| 1 | `cti-keys`: claves API en `~/.config/cti/keys.env` (0600), nunca en el historial ni en scripts | `usr/local/bin/cti-keys` |
 
 ## Perfiles de red (fase 2)
 

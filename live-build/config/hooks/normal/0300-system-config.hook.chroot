@@ -14,6 +14,18 @@ systemctl disable dnscrypt-proxy || true
 # OpenSnitch reescribe reglas de nftables al arrancar (intercepta DNS con nfqueue); se activa
 # a demanda: sudo systemctl start opensnitch
 systemctl disable opensnitch || true
+# USBGuard: en el chroot no hay dispositivos, así que su política generada al instalar está vacía y
+# bloquearía teclados y discos USB en hardware real. Se activa a demanda tras generar la política:
+#   sudo usbguard generate-policy > /etc/usbguard/rules.conf && sudo systemctl enable --now usbguard
+systemctl disable usbguard || true
+
+# Trazabilidad y actualizaciones de seguridad automáticas (ver docs/opsec.md)
+systemctl enable auditd || true
+systemctl enable unattended-upgrades || true
+sysctl -e -p /etc/sysctl.d/90-ctidistro.conf >/dev/null 2>&1 || true
+
+# Flathub para aplicaciones extra bajo demanda (cti-extras)
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 
 # Grupos del usuario en vivo (live-config lo crea en el arranque).
 mkdir -p /etc/live/config.conf.d
