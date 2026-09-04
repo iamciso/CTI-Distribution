@@ -8,6 +8,10 @@ export GOCACHE=/tmp/gocache
 export GOBIN=/usr/local/bin
 export GOFLAGS=-trimpath
 export CGO_ENABLED=0
+# Debian fija GOTOOLCHAIN=local y trixie trae Go 1.24, pero subfinder, dnsx, httpx, katana y
+# gowitness exigen Go 1.25/1.26: dejamos que "go" descargue la cadena de herramientas que pida
+# cada módulo (se guarda en GOPATH y se borra al final del hook).
+export GOTOOLCHAIN=auto
 
 grep -vE '^\s*(#|$)' "$MANIFEST" | while read -r spec; do
     echo ">>> go install $spec"
