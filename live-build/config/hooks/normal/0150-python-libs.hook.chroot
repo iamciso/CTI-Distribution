@@ -1,25 +1,6 @@
 #!/bin/sh
-# Crea el entorno /opt/cti/venv con librerías CTI y lo registra como kernel de Jupyter.
+# Entorno /opt/cti/venv con librerías CTI (ver /opt/cti/lib/install-venv.sh y manifests/python-libs.txt).
+# El lanzador /usr/local/bin/cti-python ejecuta el intérprete del venv; no puede ser un enlace simbólico
+# porque Python busca pyvenv.cfg junto a la ruta con la que se le invoca.
 set -e
-
-MANIFEST=/opt/cti/manifests/python-libs.txt
-VENV=/opt/cti/venv
-export PIP_NO_CACHE_DIR=1
-
-python3 -m venv --system-site-packages "$VENV"
-"$VENV/bin/pip" install --upgrade pip ipykernel
-
-grep -vE '^\s*(#|$)' "$MANIFEST" | while read -r spec; do
-    echo ">>> pip install $spec"
-    if ! "$VENV/bin/pip" install "$spec"; then
-        echo "!!! fallo instalando $spec" >&2
-        echo "$spec" >> /opt/cti/manifests/python-libs-failed.txt
-    fi
-done
-
-"$VENV/bin/python" -m ipykernel install --name cti --display-name "Python (CTI)"
-
-# El lanzador /usr/local/bin/cti-python (includes.chroot) ejecuta $VENV/bin/python. No puede ser
-# un enlace simbólico: Python busca pyvenv.cfg junto a la ruta con la que se le invoca, y un
-# enlace en /usr/local/bin arrancaría el intérprete del sistema sin las librerías del venv.
-rm -rf /root/.cache/pip
+sh /opt/cti/lib/install-venv.sh

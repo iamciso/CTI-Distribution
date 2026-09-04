@@ -1,38 +1,4 @@
 #!/bin/sh
-# Descarga binarios oficiales desde GitHub Releases para las herramientas que no se pueden
-# compilar con "go install" (ver /opt/cti/manifests/release-tools.txt).
+# Binarios oficiales de GitHub Releases (ver /opt/cti/lib/install-release.sh y manifests/release-tools.txt).
 set -e
-
-MANIFEST=/opt/cti/manifests/release-tools.txt
-FAILED=/opt/cti/manifests/release-failed.txt
-WORK=$(mktemp -d)
-
-fetch() {
-    name=$1; repo=$2; pattern=$3
-    url=$(curl -fsSL "https://api.github.com/repos/$repo/releases/latest" \
-        | jq -r --arg re "$pattern" '.assets[] | select(.name | test($re)) | .browser_download_url' | head -n 1)
-    [ -n "$url" ] || { echo "sin asset que case con '$pattern' en $repo" >&2; return 1; }
-    echo "    $url"
-    asset="$WORK/$(basename "$url")"
-    curl -fsSL -o "$asset" "$url"
-    rm -rf "$WORK/x" && mkdir -p "$WORK/x"
-    case "$asset" in
-        *.tar.gz|*.tgz) tar -xzf "$asset" -C "$WORK/x" ;;
-        *.zip) unzip -q "$asset" -d "$WORK/x" ;;
-        *) cp "$asset" "$WORK/x/$name" ;;
-    esac
-    bin=$(find "$WORK/x" -type f -name "$name" | head -n 1)
-    [ -n "$bin" ] || { echo "el asset no contiene un fichero llamado $name" >&2; return 1; }
-    install -m 0755 "$bin" "/usr/local/bin/$name"
-    "/usr/local/bin/$name" --version >/dev/null 2>&1 || "/usr/local/bin/$name" version >/dev/null 2>&1 || true
-}
-
-grep -vE '^\s*(#|$)' "$MANIFEST" | while IFS="$(printf '\t')" read -r name repo pattern; do
-    echo ">>> release $name ($repo)"
-    if ! fetch "$name" "$repo" "$pattern"; then
-        echo "!!! fallo descargando $name" >&2
-        echo "$name	$repo" >> "$FAILED"
-    fi
-done
-
-rm -rf "$WORK"
+sh /opt/cti/lib/install-release.sh

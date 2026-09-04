@@ -11,4 +11,5 @@ check:
 
 lint:
 	shellcheck live-build/auto/* live-build/config/hooks/normal/*.hook.chroot \
+	  live-build/config/includes.chroot/opt/cti/lib/*.sh \
 	  live-build/config/includes.chroot/usr/local/bin/* tests/*.sh tools/stacks/*.sh
