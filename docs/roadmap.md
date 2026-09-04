@@ -10,8 +10,8 @@
 ## Fase 1 - Primera ISO reproducible
 
 - [x] CI en verde: todos los paquetes existen en trixie.
-- [ ] Primer build completo con `workflow_dispatch`; revisar `pipx-failed.txt` y `go-failed.txt`.
-- [ ] Arranque en QEMU/VirtualBox: escritorio, red, `cti-netcheck`, `tests/smoke-test.sh`.
+- [x] Primer build completo con `workflow_dispatch`; revisar `pipx-failed.txt` y `go-failed.txt`.
+- [x] Arranque en QEMU/VirtualBox: escritorio, red, `cti-netcheck`, `cti-smoke-test`.
 - [ ] Fijar versiones en `pipx-tools.txt` y `go-tools.txt`.
 - [ ] Probar persistencia LUKS en USB y el instalador.
 - [ ] Publicar `v0.1.0` con SHA256SUMS.

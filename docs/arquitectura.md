@@ -60,6 +60,8 @@ quedan registrados en `/opt/cti/manifests/*-failed.txt` para revisarlos.
 - Scripts propios: prefijo `cti-`, POSIX sh, en `/usr/local/bin`.
 - Manifiestos de herramientas externas en `/opt/cti/manifests/` (fuente única de verdad para el build y
   para el smoke test).
+- El smoke test vive en la imagen (`/usr/local/bin/cti-smoke-test`); `tests/smoke-test.sh` es un
+  envoltorio para ejecutarlo desde el repositorio.
 - Servicios con impacto en OPSEC o recursos (Tor, Docker, freshclam, dnscrypt) instalados pero
   **deshabilitados**: el analista los activa de forma consciente.
 

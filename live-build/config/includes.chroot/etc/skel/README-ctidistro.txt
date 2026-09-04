@@ -12,8 +12,9 @@ Durante la investigacion:
 Plataformas (requieren Docker: sudo systemctl start docker):
   /opt/cti/stacks/           OpenCTI, MISP, ATT&CK Navigator y SpiderFoot via Docker.
 
-Herramientas que fallaron durante la construccion de la imagen (si las hay):
-  /opt/cti/manifests/*-failed.txt
+Comprobar la imagen:
+  cti-smoke-test             Verifica que las herramientas clave estan instaladas.
+  /opt/cti/manifests/*-failed.txt   Herramientas que fallaron al construir la imagen (si las hay).
 
 Scripting y notebooks:
   cti-python                 Python con stix2, pymisp, taxii2-client, pandas...
