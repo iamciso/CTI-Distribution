@@ -1,7 +1,9 @@
-# Una herramienta por línea. Formato: <paquete-pypi>[==version]
+# Una herramienta por línea. Formato: <paquete-pypi>[==version] | git+<url>@<tag>
 # TODO (fase 1): fijar versiones una vez validado el build inicial.
-spiderfoot
-theHarvester
+#
+# theHarvester: el paquete "theHarvester" de PyPI (0.0.1) es un placeholder vacío sin
+# ejecutables; se instala desde GitHub fijando la etiqueta (4.11.x requiere Python >= 3.12).
+git+https://github.com/laramies/theHarvester.git@4.11.1
 oletools
 sherlock-project
 maigret
@@ -16,6 +18,9 @@ attackcti
 mitreattack-python
 sigma-cli
 flare-capa
-pdfid
 censys
 emailrep
+# SpiderFoot: el paquete "spiderfoot" de PyPI es un placeholder y el proyecto no es instalable
+# con pip en Python 3.13 (requisitos de 2023). Se despliega con Docker: /opt/cti/stacks.
+# pdfid: el paquete PyPI no declara ejecutable (pipx lo rechaza); va en python-libs.txt y se
+# expone con /usr/local/bin/pdfid.

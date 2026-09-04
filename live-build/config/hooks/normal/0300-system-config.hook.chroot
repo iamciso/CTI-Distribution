@@ -22,7 +22,7 @@ echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-s
 dpkg-reconfigure -f noninteractive wireshark-common || true
 
 # Scripts propios ejecutables
-chmod 0755 /usr/local/bin/cti-* 2>/dev/null || true
+chmod 0755 /usr/local/bin/cti-* /usr/local/bin/pdfid 2>/dev/null || true
 
 # Directorio de stacks accesible
 mkdir -p /opt/cti/stacks

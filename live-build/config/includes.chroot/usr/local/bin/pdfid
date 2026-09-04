@@ -1,0 +1,4 @@
+#!/bin/sh
+# pdfid (Didier Stevens) está en PyPI como librería sin ejecutable: se lanza como módulo
+# desde el entorno /opt/cti/venv (ver manifests/python-libs.txt).
+exec /opt/cti/venv/bin/python -m pdfid "$@"
