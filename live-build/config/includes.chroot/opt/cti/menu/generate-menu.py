@@ -26,7 +26,7 @@ CATEGORIES = {
     "people": ("2. Personas y redes sociales", "system-users", "X-CTI-People"),
     "files": ("3. Ficheros, medios y metadatos", "image-x-generic", "X-CTI-Files"),
     "cti": ("4. Análisis CTI", "security-high", "X-CTI-Analysis"),
-    "opsec": ("5. OPSEC y anonimato", "preferences-desktop-privacy", "X-CTI-Opsec"),
+    "opsec": ("5. OPSEC y anonimato", "changes-prevent", "X-CTI-Opsec"),
     "evidence": ("6. Evidencias e informes", "x-office-document", "X-CTI-Evidence"),
     "platforms": ("7. Plataformas", "network-server", "X-CTI-Platforms"),
     "governance": ("8. Gobernanza y cumplimiento", "security-medium", "X-CTI-Governance"),
