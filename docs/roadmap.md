@@ -13,8 +13,23 @@
 - [x] Primer build completo con `workflow_dispatch`; revisar `pipx-failed.txt` y `go-failed.txt`.
 - [x] Arranque en QEMU/VirtualBox: escritorio, red, `cti-netcheck`, `cti-smoke-test`.
 - [ ] Fijar versiones en `pipx-tools.txt` y `go-tools.txt`.
-- [ ] Probar persistencia LUKS en USB y el instalador.
+- [x] Probar persistencia LUKS (VirtualBox, disco cifrado con `persistence.conf`).
+- [ ] Probar el instalador (Calamares con cifrado de disco).
 - [ ] Publicar `v0.1.0` con SHA256SUMS.
+
+## Fase 1b - Gobernanza y análisis (hecha en la primera iteración)
+
+- [x] Capa de gobernanza: Lynis, OpenSCAP, testssl.sh, ssh-audit, checkdmarc, dnsviz, trestle (OSCAL),
+      cve-bin-tool, Trivy, Grype, Syft, osv-scanner.
+- [x] Evidencias con valor probatorio: `cti-evidence url` (PNG, PDF, HTML, WARC) y sello OpenTimestamps; pywb.
+- [x] Plantillas y reporting: `cti-report` (informe de inteligencia, ACH, registro de riesgos, auditoría,
+      política, playbook, cuestionario de proveedores) con pandoc y XeLaTeX.
+- [x] `cti-keys`, `cti-feeds`, `cti-update`, `cti-selfaudit`, `cti-extras` (Flathub) y aviso de bienvenida.
+- [x] Plataformas GRC y de casos bajo demanda: CISO Assistant, DFIR-IRIS, Timesketch, GoPhish, Miniflux.
+- [x] Hardening de la estación: sysctl, auditd, unattended-upgrades, Secure Boot, USBGuard a demanda.
+- [ ] Imágenes OVA y qcow2 publicadas junto a la ISO; variantes analista / gobernanza / lite (metapaquetes).
+- [ ] SBOM y firma GPG de cada release; informe de vulnerabilidades de la propia imagen.
+- [ ] Manual de usuario y playbooks (investigación con cadena de custodia, panorama de amenazas, auditoría).
 
 ## Fase 2 - Capa OPSEC completa
 

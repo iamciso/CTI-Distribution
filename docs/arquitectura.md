@@ -38,11 +38,11 @@ puede eliminar o sustituir una capa sin tocar las demás.
 2. `lb bootstrap` crea el chroot mínimo de Debian.
 3. `lb chroot`: instala las listas de paquetes, copia `includes.chroot/` sobre el sistema y ejecuta los
    hooks en orden numérico:
-   - `0100` instala herramientas Python con pipx.
+   - `0100` instala herramientas Python con pipx (`/opt/cti/lib/install-pipx.sh`).
    - `0150` crea `/opt/cti/venv` con librerías CTI (stix2, pymisp) y un kernel de Jupyter.
    - `0200` compila herramientas Go.
    - `0250` descarga binarios oficiales de GitHub Releases (herramientas que no admiten `go install`).
-   - `0300` habilita/deshabilita servicios, grupos del usuario, permisos.
+   - `0300` habilita/deshabilita servicios, grupos del usuario, permisos, hardening y Flathub.
    - `0400` rasteriza el fondo, genera el menú de herramientas por categorías desde
      `/opt/cti/menu/tools.tsv` (lanzadores `.desktop`, menú XDG y carpetas de GNOME) y compila dconf.
 4. `lb binary` genera el squashfs, el cargador de arranque y la ISO híbrida (BIOS + UEFI, grabable en USB).
@@ -64,8 +64,11 @@ quedan registrados en `/opt/cti/manifests/*-failed.txt` para revisarlos.
   terminal desde el menú; `generate-menu.py` es la excepción en Python).
 - Menú de herramientas: una línea por herramienta en `/opt/cti/menu/tools.tsv` (categoría, tipo,
   nombre, comando o `.desktop`, descripción). Añadir una herramienta = añadir una línea.
-- Manifiestos de herramientas externas en `/opt/cti/manifests/` (fuente única de verdad para el build y
-  para el smoke test).
+- Manifiestos de herramientas externas en `/opt/cti/manifests/` (fuente única de verdad para el build,
+  para `cti-update` y para el smoke test). Los instaladores viven en `/opt/cti/lib/` y los hooks del
+  build solo los invocan, de modo que un sistema instalado se actualiza con la misma lógica.
+- Plantillas de documentos en `/opt/cti/templates/` (`cti-report`), catálogos públicos descargables con
+  `cti-feeds` y claves API gestionadas con `cti-keys`.
 - El smoke test vive en la imagen (`/usr/local/bin/cti-smoke-test`); `tests/smoke-test.sh` es un
   envoltorio para ejecutarlo desde el repositorio.
 - Servicios con impacto en OPSEC o recursos (Tor, Docker, freshclam, dnscrypt) instalados pero

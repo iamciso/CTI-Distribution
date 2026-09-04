@@ -9,6 +9,11 @@ usando los repositorios oficiales de cada proyecto:
 | MISP | Compartición de indicadores, feeds, taxonomías | MISP/misp-docker |
 | ATT&CK Navigator | Mapeo de técnicas ATT&CK sin conexión | mitre-attack/attack-navigator |
 | SpiderFoot | Automatización OSINT con interfaz web (`http://127.0.0.1:5001`) | smicallef/spiderfoot |
+| CISO Assistant | GRC: ISO 27001, NIS2, DORA, ENS, CIS, NIST CSF; riesgos, controles y evidencias | intuitem/ciso-assistant-community |
+| DFIR-IRIS | Gestión colaborativa de casos e incidentes | dfir-iris/iris-web |
+| Timesketch | Líneas de tiempo forenses colaborativas | google/timesketch |
+| GoPhish | Campañas de concienciación frente al phishing | gophish/gophish |
+| Miniflux | Agregador RSS de fuentes de amenazas y CERTs | miniflux/miniflux (imagen Docker) |
 
 ```bash
 sudo systemctl start docker
