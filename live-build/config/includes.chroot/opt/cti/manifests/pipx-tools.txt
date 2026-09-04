@@ -37,12 +37,13 @@ greynoise
 # expone con /usr/local/bin/pdfid.
 # Gobernanza, cumplimiento, evidencias y análisis
 checkdmarc
-harpoon
 compliance-trestle
 opentimestamps-client
 dfir-unfurl
-pywb
+warcio
 onionsearch
 cvss
 cve-bin-tool
 shadowfinder
+# harpoon y pywb fijan lxml<5 y gevent antiguos que no compilan en Python 3.13; se
+# sustituyen por uncover/vt/greynoise/censys y por wget --warc-file + warcio (cti-evidence).

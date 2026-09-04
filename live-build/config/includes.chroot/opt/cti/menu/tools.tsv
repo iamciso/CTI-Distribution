@@ -134,12 +134,11 @@ recon	help	dnsviz	dnsviz --help	Análisis y diagrama de DNSSEC
 recon	term	newsboat	newsboat	Lector RSS de fuentes, CERTs y boletines
 recon	help	toot	toot --help	Cliente de Mastodon para vigilancia del fediverso
 people	help	shadowfinder	shadowfinder --help	Geolocalización por sombras en fotografías
-cti	help	harpoon	harpoon	Consulta unificada de APIs de inteligencia (VT, OTX, Shodan, Censys...)
 cti	help	unfurl	unfurl --help	Desmontar y explicar URLs sospechosas
 cti	help	cvss	cvss_calculator --help	Calculadora CVSS
 cti	term	VisiData	visidata	Explorador de tablas, CSV y JSON en terminal
 cti	term	lnav	lnav	Navegador de logs
-evidence	help	pywb (WARC)	wb-manager --help	Archivo web en formato WARC (pywb)
+evidence	help	warcio	warcio --help	Inspección, índice y verificación de ficheros WARC
 evidence	help	OpenTimestamps	ots --help	Sellado de tiempo de evidencias en Bitcoin
 evidence	help	cti-report	cti-report	Plantillas de informes y conversión a PDF/DOCX
 evidence	desktop	Thunderbird	thunderbird.desktop	Correo con OpenPGP

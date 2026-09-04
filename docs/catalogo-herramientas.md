@@ -108,11 +108,10 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | compliance-trestle | pipx | Apache-2 | Catálogos y perfiles de controles en OSCAL (NIST 800-53, CSF) |
 | Trivy, Grype, Syft, osv-scanner | release | Apache-2 | SBOM y vulnerabilidades de contenedores, imágenes, código y dependencias |
 | cve-bin-tool, cvss | pipx | GPL-3 / MIT | CVEs en binarios; calculadora CVSS |
-| harpoon | pipx | MIT | Consulta unificada de APIs de inteligencia |
 | unfurl | pipx | Apache-2 | Desmontaje de URLs sospechosas |
 | VisiData, Miller, csvkit, lnav | deb | GPL / BSD / MIT / BSD | Tablas, CSV, JSON y logs en terminal |
 | newsboat, toot, Miniflux | deb / docker | MIT / GPL / Apache-2 | Vigilancia de fuentes RSS y fediverso |
-| pywb, OpenTimestamps | pipx | GPL-3 / LGPL-3 | Archivo web WARC y sellado de tiempo de evidencias |
+| warcio, OpenTimestamps | pipx | Apache-2 / LGPL-3 | Ficheros WARC (creados por `cti-evidence` con wget) y sellado de tiempo de evidencias |
 | CISO Assistant | docker | AGPL-3 | Plataforma GRC (ISO 27001, NIS2, DORA, ENS, CIS, NIST CSF) |
 | DFIR-IRIS, Timesketch | docker | LGPL-3 / Apache-2 | Gestión de casos y líneas de tiempo |
 | GoPhish | docker | MIT | Simulaciones de phishing para concienciación |
@@ -139,6 +138,7 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | Metasploit, sqlmap, hydra, nuclei, naabu | Fuera del alcance: explotación y escaneo activo |
 | mitmproxy, bulk-extractor, urlcrazy | No están en Debian 13 |
 | OSRFramework, metagoofil, pagodo, blackbird | Sin paquete PyPI utilizable en Python 3.13 (candidatas vía git en fase 2) |
+| harpoon, pywb | Fijan lxml<5 y gevent antiguos que no compilan en Python 3.13; cubiertos por uncover/vt/greynoise y wget + warcio |
 | metagoofil, zuluCrypt | No están en Debian 13; cubiertos por theHarvester y Discos de GNOME |
 | twint, snscrape | Sin mantenimiento, rotas por cambios en las plataformas |
 | Obsidian, Joplin | No empaquetadas en Debian; candidatas vía Flatpak en fase 3 |

@@ -96,8 +96,8 @@ analista de ciberinteligencia con enfoque de gobernanza (no ofensivo):
 | Cumplimiento y riesgo | CISO Assistant (ISO 27001, NIS2, DORA, ENS, CIS, NIST CSF) bajo demanda; `trestle` (OSCAL); plantillas de registro de riesgos, política, auditoría y proveedores (`cti-report`) |
 | Auditoría defensiva | Lynis, OpenSCAP (guías SSG), `testssl.sh`, `ssh-audit`, `checkdmarc`, `dnsviz`; `cti-selfaudit` contra la propia estación |
 | Vulnerabilidades y SBOM | Trivy, Grype, Syft, osv-scanner, cve-bin-tool, calculadora CVSS; catálogos KEV, EPSS, CWE, CAPEC con `cti-feeds` |
-| Análisis de inteligencia | Plantillas ACH, escala Admiralty, niveles de confianza, TLP/PAP; `harpoon`, `unfurl`, VisiData, lnav, JupyterLab |
-| Evidencias con valor probatorio | `cti-evidence url` (PNG, PDF, HTML, WARC), sello de tiempo OpenTimestamps, pywb |
+| Análisis de inteligencia | Plantillas ACH, escala Admiralty, niveles de confianza, TLP/PAP; `unfurl`, VisiData, lnav, JupyterLab |
+| Evidencias con valor probatorio | `cti-evidence url` (PNG, PDF, HTML, WARC), sello de tiempo OpenTimestamps, warcio |
 | Incidentes y casos | DFIR-IRIS, Timesketch, playbooks NIST SP 800-61; GoPhish para concienciación |
 | Estación endurecida | Secure Boot, sysctl, auditd, actualizaciones automáticas, AppArmor, instalador Calamares con cifrado |
 
