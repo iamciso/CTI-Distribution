@@ -14,6 +14,10 @@ systemctl disable dnscrypt-proxy || true
 # OpenSnitch reescribe reglas de nftables al arrancar (intercepta DNS con nfqueue); se activa
 # a demanda: sudo systemctl start opensnitch
 systemctl disable opensnitch || true
+# La interfaz de OpenSnitch se autoarranca en cada sesión: solo tiene sentido con el demonio activo.
+if [ -f /etc/xdg/autostart/opensnitch_ui.desktop ]; then
+    sed -i 's|^Exec=.*|Exec=sh -c "systemctl is-active -q opensnitch \&\& exec opensnitch-ui"|' /etc/xdg/autostart/opensnitch_ui.desktop
+fi
 # USBGuard: en el chroot no hay dispositivos, así que su política generada al instalar está vacía y
 # bloquearía teclados y discos USB en hardware real. Se activa a demanda tras generar la política:
 #   sudo usbguard generate-policy > /etc/usbguard/rules.conf && sudo systemctl enable --now usbguard
@@ -31,6 +35,7 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 mkdir -p /etc/live/config.conf.d
 cat > /etc/live/config.conf.d/10-ctidistro.conf <<'CONF'
 LIVE_USER_DEFAULT_GROUPS="audio cdrom dip floppy video plugdev netdev sudo docker wireshark"
+LIVE_USER_FULLNAME="Analista CTI"
 CONF
 
 # Wireshark: permitir captura a miembros del grupo wireshark

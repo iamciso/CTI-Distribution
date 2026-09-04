@@ -56,6 +56,12 @@ quedan registrados en `/opt/cti/manifests/*-failed.txt` para revisarlos.
 |---|---|---|
 | Amnésico | Arrancar la ISO sin persistencia | Investigaciones sensibles, no queda rastro local |
 | Persistente cifrado | USB con partición `persistence` cifrada con LUKS | Estación portátil con casos y credenciales |
+
+Persistencia: con `persistence.conf` = `/ union` se guarda todo el sistema (incluidos `/etc/passwd` y la
+configuración que live-config escribe al arrancar), así que **al cambiar de versión de la ISO hay que
+recrear el volumen** o el sistema nuevo arrancará con ficheros de sistema antiguos (por ejemplo, GDM falla
+porque falta el usuario `Debian-gdm`). Para conservar solo los datos entre versiones usa `/home union`
+(casos, claves API, evidencias) y deja el sistema en modo amnésico.
 | Instalado | Instalador de Debian incluido en el menú de arranque | Estación de trabajo fija o máquina virtual |
 
 ## Convenciones

@@ -26,6 +26,10 @@ multi-monitor=true
 
 [org/gnome/shell/extensions/arcmenu]
 position-in-panel='Left'
+# Disposición con la lista de categorías a la vista (estilo Kali/Whisker)
+menu-layout='Whisker'
+# Evita el aviso "ArcMenu vNN released" en cada primer inicio de sesión
+update-notifier-project-version=65
 menu-button-appearance='Icon'
 show-activities-button=false
 
