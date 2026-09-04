@@ -20,6 +20,17 @@ sigma-cli
 flare-capa
 censys
 emailrep
+# Personas, teléfonos y documentos
+ignorant
+toutatis
+xeuledoc
+socid-extractor
+telegram-phone-number-checker
+crosslinked
+auto-archiver
+# Buscadores de dispositivos y reputación (requieren clave API)
+zoomeye
+greynoise
 # SpiderFoot: el paquete "spiderfoot" de PyPI es un placeholder y el proyecto no es instalable
 # con pip en Python 3.13 (requisitos de 2023). Se despliega con Docker: /opt/cti/stacks.
 # pdfid: el paquete PyPI no declara ejecutable (pipx lo rechaza); va en python-libs.txt y se

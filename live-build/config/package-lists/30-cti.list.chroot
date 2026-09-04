@@ -16,3 +16,6 @@ jupyter-notebook
 graphviz
 sqlite3
 pandoc
+jupyterlab
+python3-matplotlib
+python3-folium

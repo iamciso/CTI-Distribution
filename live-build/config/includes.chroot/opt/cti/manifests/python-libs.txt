@@ -4,6 +4,9 @@
 stix2
 taxii2-client
 pymisp
+pycti
+vt-py
+OTXv2
 # pdfid se distribuye en PyPI como librería (sin console_script); /usr/local/bin/pdfid
 # lo ejecuta como módulo desde este venv.
 pdfid

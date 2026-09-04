@@ -15,7 +15,11 @@ olevba yara clamscan ssdeep binwalk jupyter-notebook pandoc
 tor torsocks proxychains4 macchanger wg openvpn nft firejail onionshare-cli age
 sherlock maigret holehe socialscan ghunt h8mail bbot sigma capa pdfid censys
 subfinder dnsx httpx katana waybackurls assetfinder gau gowitness vt
-cti-netcheck cti-evidence cti-python
+uncover asnmap cdncheck tlsx hakrawler metabigor phoneinfoga gitleaks trufflehog
+ignorant toutatis xeuledoc socid_extractor telegram-phone-number-checker crosslinked auto-archiver zoomeye greynoise
+chromium foremost photorec stegseek zbarimg jupyter-lab
+gnome-shell gdm3 nautilus gnome-terminal
+cti-netcheck cti-evidence cti-python cti-run cti-smoke-test
 docker
 "
 

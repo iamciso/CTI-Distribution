@@ -17,13 +17,15 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | Amass | go | Apache-2 | Enumeración de subdominios y mapeo de superficie |
 | Sublist3r | deb | GPL-2 | Subdominios desde buscadores |
 | subfinder, dnsx, httpx, katana | go | MIT | Cadena ProjectDiscovery: descubrimiento y verificación |
+| uncover, asnmap, cdncheck, tlsx | go | MIT | ProjectDiscovery: buscadores agregados, ASN, CDN/WAF y certificados |
+| hakrawler, metabigor | go | MIT | Rastreo rápido de enlaces; IPs, ASN y organización |
 | waybackurls, gau, assetfinder | go | MIT | URLs históricas y activos |
 | dnsrecon, dnsenum, fierce | deb | GPL | Enumeración DNS |
 | dnstwist | deb | Apache-2 | Dominios typosquatting / phishing |
 | whatweb, wafw00f | deb | GPL | Huella tecnológica de sitios web |
 | gowitness | go | GPL-3 | Capturas de pantalla masivas de sitios |
 | nmap, masscan | deb | Nmap/AGPL | Incluidos para verificación puntual; **no** para escaneo masivo de terceros |
-| Shodan CLI, Censys CLI | deb / pipx | MIT / Apache-2 | Requieren claves API |
+| Shodan CLI, Censys CLI, ZoomEye CLI | deb / pipx | MIT / Apache-2 / GPL-3 | Requieren claves API |
 | whois, dig, mtr, geoip | deb | varias | Utilidades de red |
 
 ## Personas, redes sociales e identidades
@@ -36,6 +38,10 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | GHunt | pipx | AGPL-3 | Cuentas Google |
 | h8mail, emailrep | pipx | BSD / MIT | Filtraciones y reputación de correos |
 | bbot | pipx | GPL-3 | OSINT recursivo modular |
+| PhoneInfoga, ignorant, telegram-phone-number-checker | go / pipx | GPL-3 / GPL-3 / MIT | Números de teléfono: operador, servicios registrados, cuentas de Telegram |
+| toutatis, socid-extractor, xeuledoc | pipx | GPL-3 / MIT / GPL-3 | Instagram, extracción de identificadores de perfiles, documentos de Google |
+| CrossLinked | pipx | MIT | Empleados de una organización vía buscadores (LinkedIn) |
+| auto-archiver (Bellingcat) | pipx | MIT | Archivado con hash y captura de publicaciones y páginas |
 | Instaloader, gallery-dl, yt-dlp | deb | MIT / GPL / Unlicense | Descarga y archivado de contenido |
 | Multi-Account Containers (Firefox) | extensión | MPL-2 | Separación de identidades (sock puppets) |
 
@@ -47,6 +53,8 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | mat2 | deb | LGPL-3 | Limpieza de metadatos antes de compartir |
 | Tesseract (es, en) | deb | Apache-2 | OCR |
 | GIMP, ImageMagick, ffmpeg | deb | GPL | Mejora y conversión de imagen y vídeo |
+| foremost, PhotoRec (testdisk), sleuthkit | deb | GPL | Carving y recuperación de ficheros |
+| steghide, stegseek, zbar-tools, qrencode | deb | GPL / MIT / LGPL | Esteganografía y códigos QR/barras |
 | poppler-utils, pdfgrep, pdfid | deb / venv | GPL / Public | Análisis de PDF. `pdfid` se instala en `/opt/cti/venv` (PyPI lo publica sin ejecutable) con un lanzador en `/usr/local/bin` |
 
 ## CTI: formatos, detección y triaje
@@ -63,8 +71,10 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | binwalk, pev, binutils | deb | MIT / BSD / GPL | Triaje ligero de ficheros y documentos |
 | oletools | pipx | BSD-2 | olevba, oleid, mraptor para documentos Office |
 | iocextract | pipx | GPL-2 | Extracción de IOCs de texto |
-| vt-cli | go | Apache-2 | VirusTotal desde la terminal |
-| Jupyter, pandas, networkx, graphviz | deb | BSD | Análisis de datos y grafos |
+| vt-cli, GreyNoise CLI | go / pipx | Apache-2 / MIT | VirusTotal y GreyNoise desde la terminal |
+| gitleaks, TruffleHog | go | MIT / AGPL-3 | Secretos y credenciales expuestos en repositorios y ficheros |
+| pycti, vt-py, OTXv2 | venv | Apache-2 / Apache-2 / BSD | Clientes de OpenCTI, VirusTotal y AlienVault OTX en `/opt/cti/venv` |
+| JupyterLab, pandas, matplotlib, folium, networkx, graphviz | deb | BSD | Análisis de datos, mapas y grafos |
 | OpenCTI | docker | Apache-2 | Plataforma de conocimiento CTI |
 | MISP | docker | AGPL-3 | Compartición de indicadores |
 | ATT&CK Navigator | docker | Apache-2 | Mapas de técnicas |
@@ -101,7 +111,9 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 |---|---|
 | Maltego | Licencia propietaria; el usuario puede instalar Maltego CE por su cuenta |
 | Hunchly | Propietaria y de pago |
-| Metasploit, sqlmap, hydra, etc. | Fuera del alcance: explotación activa |
+| Metasploit, sqlmap, hydra, nuclei, naabu | Fuera del alcance: explotación y escaneo activo |
+| mitmproxy, bulk-extractor, urlcrazy | No están en Debian 13 |
+| OSRFramework, metagoofil, pagodo, blackbird | Sin paquete PyPI utilizable en Python 3.13 (candidatas vía git en fase 2) |
 | metagoofil, zuluCrypt | No están en Debian 13; cubiertos por theHarvester y Discos de GNOME |
 | twint, snscrape | Sin mantenimiento, rotas por cambios en las plataformas |
 | Obsidian, Joplin | No empaquetadas en Debian; candidatas vía Flatpak en fase 3 |

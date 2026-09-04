@@ -39,3 +39,11 @@ geoip-bin
 mmdb-bin
 python3-geoip2
 python3-shodan
+# Carving, esteganografía y códigos QR/barras
+foremost
+testdisk
+sleuthkit
+steghide
+stegseek
+zbar-tools
+qrencode
