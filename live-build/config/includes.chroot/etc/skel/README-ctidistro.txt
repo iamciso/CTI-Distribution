@@ -10,7 +10,7 @@ Durante la investigacion:
   Firefox incluye Multi-Account Containers para separar identidades.
 
 Plataformas (requieren Docker: sudo systemctl start docker):
-  /opt/cti/stacks/           OpenCTI, MISP, ATT&CK Navigator via docker compose.
+  /opt/cti/stacks/           OpenCTI, MISP, ATT&CK Navigator y SpiderFoot via Docker.
 
 Herramientas que fallaron durante la construccion de la imagen (si las hay):
   /opt/cti/manifests/*-failed.txt

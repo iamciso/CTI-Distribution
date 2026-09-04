@@ -12,7 +12,7 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 
 | Herramienta | Origen | Licencia | Notas |
 |---|---|---|---|
-| theHarvester | pipx | GPL-2 | Correos, subdominios, IPs desde fuentes públicas |
+| theHarvester | pipx (desde GitHub, etiqueta fija) | GPL-2 | Correos, subdominios, IPs desde fuentes públicas. El paquete PyPI es un placeholder vacío |
 | recon-ng | deb | GPL-3 | Framework modular con claves API |
 | Amass | go | Apache-2 | Enumeración de subdominios y mapeo de superficie |
 | Sublist3r | deb | GPL-2 | Subdominios desde buscadores |
@@ -30,7 +30,7 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 
 | Herramienta | Origen | Licencia | Notas |
 |---|---|---|---|
-| SpiderFoot | pipx | MIT | Automatización OSINT con interfaz web (`spiderfoot -l 127.0.0.1:5001`) |
+| SpiderFoot | docker | MIT | Automatización OSINT con interfaz web. Su versión 4.0 (2022) no se instala en Python 3.13; se construye con Docker desde `/opt/cti/stacks/spiderfoot` |
 | Sherlock, Maigret | pipx | MIT | Nombres de usuario en cientos de sitios |
 | Holehe, socialscan | pipx | GPL-3 / MPL-2 | Correos registrados en servicios |
 | GHunt | pipx | AGPL-3 | Cuentas Google |
@@ -47,7 +47,7 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | mat2 | deb | LGPL-3 | Limpieza de metadatos antes de compartir |
 | Tesseract (es, en) | deb | Apache-2 | OCR |
 | GIMP, ImageMagick, ffmpeg | deb | GPL | Mejora y conversión de imagen y vídeo |
-| poppler-utils, pdfgrep, pdfid | deb / pipx | GPL / Public | Análisis de PDF |
+| poppler-utils, pdfgrep, pdfid | deb / venv | GPL / Public | Análisis de PDF. `pdfid` se instala en `/opt/cti/venv` (PyPI lo publica sin ejecutable) con un lanzador en `/usr/local/bin` |
 
 ## CTI: formatos, detección y triaje
 

@@ -19,6 +19,7 @@ clone() {
 clone opencti          https://github.com/OpenCTI-Platform/docker.git
 clone misp             https://github.com/MISP/misp-docker.git
 clone attack-navigator https://github.com/mitre-attack/attack-navigator.git
+clone spiderfoot       https://github.com/smicallef/spiderfoot.git
 
 cat <<MSG
 
@@ -26,4 +27,5 @@ Stacks descargados en $DEST. Siguientes pasos:
   OpenCTI : cd $DEST/opencti && cp .env.sample .env && edita .env && docker compose up -d
   MISP    : cd $DEST/misp && cp template.env .env && edita .env && docker compose up -d
   Navigator: cd $DEST/attack-navigator && docker build -t attack-navigator . && docker run -p 4200:4200 attack-navigator
+  SpiderFoot: cd $DEST/spiderfoot && docker build -t spiderfoot . && docker run -p 127.0.0.1:5001:5001 spiderfoot
 MSG

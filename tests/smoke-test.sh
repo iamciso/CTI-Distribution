@@ -7,7 +7,7 @@ tools="
 nmap amass theHarvester recon-ng dnstwist whatweb exiftool mat2 gallery-dl yt-dlp instaloader
 olevba yara clamscan ssdeep binwalk r2 jupyter-notebook pandoc
 tor torsocks proxychains4 macchanger wg openvpn nft firejail onionshare-cli age
-spiderfoot sherlock maigret holehe socialscan ghunt h8mail bbot sigma capa pdfid censys
+sherlock maigret holehe socialscan ghunt h8mail bbot sigma capa pdfid censys
 subfinder dnsx httpx katana waybackurls assetfinder gau gowitness vt
 cti-netcheck cti-evidence cti-python
 docker
