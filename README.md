@@ -66,8 +66,8 @@ make clean          # limpia artefactos
 make check          # valida que todos los paquetes existen en el archivo de Debian
 ```
 
-Requisitos del sistema en vivo: 4 GB de RAM (la imagen ocupa unos 5 GB). Instalación en disco con
-Calamares: disco de 15 GB como mínimo, 40 GB recomendados.
+Requisitos del sistema en vivo: 4 GB de RAM (la ISO ocupa unos 5 GB; el sistema descomprimido, 15 GB).
+Instalación en disco con Calamares: disco de 30 GB como mínimo, 60 GB recomendados.
 
 Prueba rápida en QEMU:
 
