@@ -97,6 +97,29 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | Discos de GNOME, cryptsetup | deb | GPL | Volúmenes LUKS con interfaz gráfica y por consola |
 | BleachBit, secure-delete, USBGuard | deb | GPL | Limpieza y control de USB |
 
+## Gobernanza, cumplimiento y auditoría defensiva
+
+| Herramienta | Origen | Licencia | Notas |
+|---|---|---|---|
+| Lynis | deb | GPL-3 | Auditoría de hardening del sistema |
+| OpenSCAP + SCAP Security Guide | deb | LGPL / BSD | Evaluación de cumplimiento (perfiles ANSSI para Debian) |
+| testssl.sh, ssh-audit, dnsviz | deb | GPL / MIT / GPL | Configuración TLS, SSH y DNSSEC de servicios propios |
+| checkdmarc | pipx | Apache-2 | SPF, DKIM y DMARC del dominio |
+| compliance-trestle | pipx | Apache-2 | Catálogos y perfiles de controles en OSCAL (NIST 800-53, CSF) |
+| Trivy, Grype, Syft, osv-scanner | release | Apache-2 | SBOM y vulnerabilidades de contenedores, imágenes, código y dependencias |
+| cve-bin-tool, cvss | pipx | GPL-3 / MIT | CVEs en binarios; calculadora CVSS |
+| harpoon | pipx | MIT | Consulta unificada de APIs de inteligencia |
+| unfurl | pipx | Apache-2 | Desmontaje de URLs sospechosas |
+| VisiData, Miller, csvkit, lnav | deb | GPL / BSD / MIT / BSD | Tablas, CSV, JSON y logs en terminal |
+| newsboat, toot, Miniflux | deb / docker | MIT / GPL / Apache-2 | Vigilancia de fuentes RSS y fediverso |
+| pywb, OpenTimestamps | pipx | GPL-3 / LGPL-3 | Archivo web WARC y sellado de tiempo de evidencias |
+| CISO Assistant | docker | AGPL-3 | Plataforma GRC (ISO 27001, NIS2, DORA, ENS, CIS, NIST CSF) |
+| DFIR-IRIS, Timesketch | docker | LGPL-3 / Apache-2 | Gestión de casos y líneas de tiempo |
+| GoPhish | docker | MIT | Simulaciones de phishing para concienciación |
+| Calamares | deb | GPL-3 | Instalador gráfico con cifrado de disco |
+| Flatpak (Flathub) | deb | LGPL | Obsidian, Logseq, Signal, Element, draw.io, Zotero bajo demanda (`cti-extras`) |
+| Thunderbird | deb | MPL-2 | Correo con OpenPGP |
+
 ## Documentación y reporting
 
 | Herramienta | Origen | Notas |
@@ -104,7 +127,8 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | CherryTree | deb | Notas jerárquicas por caso |
 | LibreOffice, pandoc | deb | Informes; pandoc convierte Markdown a PDF/DOCX |
 | KeePassXC | deb | Claves API y credenciales de personas ficticias |
-| `cti-evidence` | propio | Hash + marca de tiempo + manifiesto CSV |
+| `cti-evidence` | propio | Hash, marca de tiempo, captura de páginas y sello OpenTimestamps |
+| `cti-report` | propio | Plantillas Markdown (inteligencia, ACH, riesgos, auditoría, política, playbook, proveedores) y PDF/DOCX con pandoc y XeLaTeX |
 
 ## Evaluadas y excluidas
 

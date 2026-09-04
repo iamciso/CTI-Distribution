@@ -35,3 +35,14 @@ greynoise
 # con pip en Python 3.13 (requisitos de 2023). Se despliega con Docker: /opt/cti/stacks.
 # pdfid: el paquete PyPI no declara ejecutable (pipx lo rechaza); va en python-libs.txt y se
 # expone con /usr/local/bin/pdfid.
+# Gobernanza, cumplimiento, evidencias y análisis
+checkdmarc
+harpoon
+compliance-trestle
+opentimestamps-client
+dfir-unfurl
+pywb
+onionsearch
+cvss
+cve-bin-tool
+shadowfinder

@@ -126,3 +126,41 @@ platforms	url	OpenCTI	http://localhost:8080	Plataforma de conocimiento CTI (dock
 platforms	url	MISP	https://localhost	Compartición de indicadores (docker compose en /opt/cti/stacks/misp)
 platforms	url	ATT&CK Navigator	http://localhost:4200	Mapas de técnicas ATT&CK
 platforms	url	SpiderFoot	http://127.0.0.1:5001	Automatización OSINT con interfaz web
+
+# Gobernanza, auditoría defensiva y evidencias (añadido en la fase de gobernanza)
+recon	help	onionsearch	onionsearch --help	Búsqueda en motores de la red Tor (dark web)
+recon	help	checkdmarc	checkdmarc --help	Postura de correo de un dominio: SPF, DKIM y DMARC
+recon	help	dnsviz	dnsviz --help	Análisis y diagrama de DNSSEC
+recon	term	newsboat	newsboat	Lector RSS de fuentes, CERTs y boletines
+recon	help	toot	toot --help	Cliente de Mastodon para vigilancia del fediverso
+people	help	shadowfinder	shadowfinder --help	Geolocalización por sombras en fotografías
+cti	help	harpoon	harpoon	Consulta unificada de APIs de inteligencia (VT, OTX, Shodan, Censys...)
+cti	help	unfurl	unfurl --help	Desmontar y explicar URLs sospechosas
+cti	help	cvss	cvss_calculator --help	Calculadora CVSS
+cti	term	VisiData	visidata	Explorador de tablas, CSV y JSON en terminal
+cti	term	lnav	lnav	Navegador de logs
+evidence	help	pywb (WARC)	wb-manager --help	Archivo web en formato WARC (pywb)
+evidence	help	OpenTimestamps	ots --help	Sellado de tiempo de evidencias en Bitcoin
+evidence	help	cti-report	cti-report	Plantillas de informes y conversión a PDF/DOCX
+evidence	desktop	Thunderbird	thunderbird.desktop	Correo con OpenPGP
+governance	help	Lynis	lynis --help	Auditoría de seguridad y hardening del sistema
+governance	help	OpenSCAP	oscap --help	Evaluación de cumplimiento con guías SCAP (ANSSI, CIS...)
+governance	help	cti-selfaudit	cti-selfaudit --help	Autoauditoría de esta estación (Lynis + OpenSCAP)
+governance	help	testssl.sh	testssl.sh --help	Auditoría de configuración TLS de un servicio propio
+governance	help	ssh-audit	ssh-audit --help	Auditoría de configuración SSH
+governance	help	trestle (OSCAL)	trestle --help	Catálogos y perfiles de controles en OSCAL (NIST)
+governance	help	cve-bin-tool	cve-bin-tool --help	Vulnerabilidades conocidas en binarios y dependencias
+governance	help	Trivy	trivy --help	Vulnerabilidades y SBOM de contenedores, imágenes y código
+governance	help	Grype	grype --help	Vulnerabilidades a partir de un SBOM o directorio
+governance	help	Syft	syft --help	Generación de SBOM (SPDX, CycloneDX)
+governance	help	osv-scanner	osv-scanner --help	Dependencias vulnerables (base OSV)
+governance	help	cti-keys	cti-keys --help	Claves API de los servicios de inteligencia
+governance	help	cti-feeds	cti-feeds --help	Descarga de catálogos públicos: ATT&CK, KEV, EPSS, CWE, NIST CSF, 800-53
+governance	help	cti-extras	cti-extras	Aplicaciones adicionales vía Flathub (Obsidian, Signal, Draw.io...)
+governance	help	cti-update	sudo cti-update --help	Actualizar paquetes y herramientas de un sistema instalado
+governance	desktop	Instalar en disco	calamares-install-debian.desktop	Instalación en disco con cifrado (Calamares)
+platforms	url	CISO Assistant	https://localhost:8443	Plataforma GRC: ISO 27001, NIS2, DORA, ENS, riesgos y controles
+platforms	url	DFIR-IRIS	https://localhost:8444	Gestión de casos e incidentes
+platforms	url	Timesketch	http://localhost:8445	Líneas de tiempo colaborativas
+platforms	url	GoPhish	https://localhost:3333	Campañas de concienciación frente al phishing
+platforms	url	Miniflux	http://localhost:8446	Agregador RSS de fuentes de amenazas

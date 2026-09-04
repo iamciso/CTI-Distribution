@@ -29,6 +29,7 @@ CATEGORIES = {
     "opsec": ("5. OPSEC y anonimato", "preferences-desktop-privacy", "X-CTI-Opsec"),
     "evidence": ("6. Evidencias e informes", "x-office-document", "X-CTI-Evidence"),
     "platforms": ("7. Plataformas", "network-server", "X-CTI-Platforms"),
+    "governance": ("8. Gobernanza y cumplimiento", "security-medium", "X-CTI-Governance"),
 }
 KINDS = ("help", "term", "url", "desktop")
 

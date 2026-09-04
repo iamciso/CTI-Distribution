@@ -1,0 +1,41 @@
+# Gobernanza, cumplimiento y auditoría defensiva: para responsables de seguridad y analistas
+# que necesitan evaluar, documentar y reportar, no explotar.
+# Auditoría de configuración y postura (del propio entorno o de sistemas autorizados)
+lynis
+openscap-scanner
+ssg-base
+ssg-debian
+testssl.sh
+ssh-audit
+dnsviz
+# Datos, logs y tablas en terminal
+visidata
+miller
+csvkit
+lnav
+# Vigilancia de fuentes y redes federadas
+newsboat
+toot
+# Correo con OpenPGP para recibir y analizar mensajes con seguridad
+thunderbird
+thunderbird-l10n-es-es
+libemail-outlook-message-perl
+# Diagramas e informes en PDF con pandoc
+plantuml
+texlive-xetex
+texlive-latex-recommended
+texlive-fonts-recommended
+texlive-lang-spanish
+# Geolocalización y mapas
+python3-geopy
+python3-shapely
+# Instalador gráfico con cifrado de disco y aplicaciones extra bajo demanda (Flathub)
+calamares
+calamares-settings-debian
+flatpak
+# Hardening y trazabilidad de la propia estación
+auditd
+unattended-upgrades
+apparmor-profiles-extra
+libpam-pwquality
+zenity
