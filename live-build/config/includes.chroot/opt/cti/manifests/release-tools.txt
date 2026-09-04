@@ -1,0 +1,6 @@
+# Binarios oficiales publicados en GitHub Releases (para herramientas que no admiten "go install").
+# Formato: <nombre-binario>	<propietario/repo>	<expresion-regular-del-asset-linux-amd64>
+# El hook 0250 consulta la release "latest", descarga el .tar.gz o .zip que casa con la expresión y
+# copia el binario <nombre> a /usr/local/bin. Los fallos quedan en release-failed.txt.
+trufflehog	trufflesecurity/trufflehog	trufflehog_.*_linux_amd64\.tar\.gz$
+phoneinfoga	sundowndev/phoneinfoga	phoneinfoga_Linux_x86_64\.tar\.gz$

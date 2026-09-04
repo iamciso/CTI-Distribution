@@ -15,6 +15,7 @@ Plataformas (requieren Docker: sudo systemctl start docker):
 Comprobar la imagen:
   cti-smoke-test             Verifica que las herramientas clave estan instaladas.
   /opt/cti/manifests/*-failed.txt   Herramientas que fallaron al construir la imagen (si las hay).
+  Menu de aplicaciones: herramientas por categorias (1. Reconocimiento ... 7. Plataformas).
 
 Scripting y notebooks:
   cti-python                 Python con stix2, pymisp, taxii2-client, pandas...

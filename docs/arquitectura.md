@@ -17,7 +17,7 @@ Se evaluaron cuatro opciones:
 ┌─────────────────────────────────────────────────────────────┐
 │ 5. Plataformas (Docker Compose, bajo demanda)               │  OpenCTI, MISP, ATT&CK Navigator
 ├─────────────────────────────────────────────────────────────┤
-│ 4. Herramientas fuera de Debian (pipx en /opt/pipx, Go)     │  SpiderFoot, Maigret, subfinder...
+│ 4. Herramientas fuera de Debian (pipx, Go, releases GitHub) │  Maigret, subfinder, TruffleHog...
 ├─────────────────────────────────────────────────────────────┤
 │ 3. Herramientas Debian por dominio (package-lists 20-40)    │  theHarvester, yara, tor...
 ├─────────────────────────────────────────────────────────────┤
@@ -41,6 +41,7 @@ puede eliminar o sustituir una capa sin tocar las demás.
    - `0100` instala herramientas Python con pipx.
    - `0150` crea `/opt/cti/venv` con librerías CTI (stix2, pymisp) y un kernel de Jupyter.
    - `0200` compila herramientas Go.
+   - `0250` descarga binarios oficiales de GitHub Releases (herramientas que no admiten `go install`).
    - `0300` habilita/deshabilita servicios, grupos del usuario, permisos.
    - `0400` rasteriza el fondo, genera el menú de herramientas por categorías desde
      `/opt/cti/menu/tools.tsv` (lanzadores `.desktop`, menú XDG y carpetas de GNOME) y compila dconf.

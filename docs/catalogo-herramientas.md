@@ -1,7 +1,8 @@
 # Catálogo de herramientas
 
 Origen: **deb** = archivo Debian trixie, **pipx** = PyPI en entorno aislado, **go** = compilado en el
-build, **venv** = librería en `/opt/cti/venv`, **docker** = desplegado bajo demanda. Criterio de inclusión: uso pasivo o de análisis,
+build, **release** = binario oficial descargado de GitHub Releases en el build, **venv** = librería en
+`/opt/cti/venv`, **docker** = desplegado bajo demanda. Criterio de inclusión: uso pasivo o de análisis,
 mantenida activamente, licencia compatible con la redistribución.
 
 Los nombres de paquete se validan automáticamente en CI (`tests/check-packages.sh`). Los
@@ -38,7 +39,7 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | GHunt | pipx | AGPL-3 | Cuentas Google |
 | h8mail, emailrep | pipx | BSD / MIT | Filtraciones y reputación de correos |
 | bbot | pipx | GPL-3 | OSINT recursivo modular |
-| PhoneInfoga, ignorant, telegram-phone-number-checker | go / pipx | GPL-3 / GPL-3 / MIT | Números de teléfono: operador, servicios registrados, cuentas de Telegram |
+| PhoneInfoga, ignorant, telegram-phone-number-checker | release / pipx | GPL-3 / GPL-3 / MIT | Números de teléfono: operador, servicios registrados, cuentas de Telegram |
 | toutatis, socid-extractor, xeuledoc | pipx | GPL-3 / MIT / GPL-3 | Instagram, extracción de identificadores de perfiles, documentos de Google |
 | CrossLinked | pipx | MIT | Empleados de una organización vía buscadores (LinkedIn) |
 | auto-archiver (Bellingcat) | pipx | MIT | Archivado con hash y captura de publicaciones y páginas |
@@ -72,7 +73,7 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | oletools | pipx | BSD-2 | olevba, oleid, mraptor para documentos Office |
 | iocextract | pipx | GPL-2 | Extracción de IOCs de texto |
 | vt-cli, GreyNoise CLI | go / pipx | Apache-2 / MIT | VirusTotal y GreyNoise desde la terminal |
-| gitleaks, TruffleHog | go | MIT / AGPL-3 | Secretos y credenciales expuestos en repositorios y ficheros |
+| gitleaks, TruffleHog | go / release | MIT / AGPL-3 | Secretos y credenciales expuestos en repositorios y ficheros |
 | pycti, vt-py, OTXv2 | venv | Apache-2 / Apache-2 / BSD | Clientes de OpenCTI, VirusTotal y AlienVault OTX en `/opt/cti/venv` |
 | JupyterLab, pandas, matplotlib, folium, networkx, graphviz | deb | BSD | Análisis de datos, mapas y grafos |
 | OpenCTI | docker | Apache-2 | Plataforma de conocimiento CTI |

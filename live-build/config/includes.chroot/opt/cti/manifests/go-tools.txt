@@ -17,6 +17,7 @@ github.com/projectdiscovery/cdncheck/cmd/cdncheck@latest
 github.com/projectdiscovery/tlsx/cmd/tlsx@latest
 github.com/hakluke/hakrawler@latest
 github.com/j3ssie/metabigor@latest
-github.com/sundowndev/phoneinfoga/v2@latest
-github.com/gitleaks/gitleaks/v8@latest
-github.com/trufflesecurity/trufflehog/v3@latest
+# gitleaks declara su módulo con la ruta antigua (zricethezav); con gitleaks/gitleaks falla.
+github.com/zricethezav/gitleaks/v8@latest
+# TruffleHog (replace en go.mod) y PhoneInfoga (assets web fuera del módulo) no admiten
+# "go install": se descargan como binarios de release, ver release-tools.txt.
