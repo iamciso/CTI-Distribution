@@ -14,7 +14,10 @@ if [ "$(id -u)" -eq 0 ] && [ -f /etc/apt/sources.list.d/debian.sources ]; then
 fi
 
 cat "$LISTS_DIR"/*.list.chroot | grep -vE '^\s*(#|$)' | sort -u | while read -r pkg; do
-    if ! apt-cache show "$pkg" >/dev/null 2>&1; then
+    # "apt-cache show" devuelve 0 para paquetes virtuales o sin candidato (p. ej. radare2 en
+    # trixie); lo que importa es que apt tenga un candidato instalable.
+    cand=$(apt-cache policy "$pkg" 2>/dev/null | awk '/Candidate:/{print $2}')
+    if [ -z "$cand" ] || [ "$cand" = "(none)" ]; then
         echo "FALTA: $pkg"
     fi
 done > /tmp/check-packages.out
