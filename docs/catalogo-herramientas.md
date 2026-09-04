@@ -60,7 +60,7 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | YARA | deb | BSD-3 | Reglas de detección |
 | capa | pipx | Apache-2 | Capacidades de binarios |
 | ClamAV, ssdeep, hashdeep | deb | GPL | Antivirus y hashes difusos |
-| binwalk, radare2, pev | deb | MIT / LGPL / BSD | Triaje ligero de ficheros y documentos |
+| binwalk, pev, binutils | deb | MIT / BSD / GPL | Triaje ligero de ficheros y documentos |
 | oletools | pipx | BSD-2 | olevba, oleid, mraptor para documentos Office |
 | iocextract | pipx | GPL-2 | Extracción de IOCs de texto |
 | vt-cli | go | Apache-2 | VirusTotal desde la terminal |
@@ -106,3 +106,4 @@ no están en Debian 13 y se instalan por pipx, Go o venv.
 | twint, snscrape | Sin mantenimiento, rotas por cambios en las plataformas |
 | Obsidian, Joplin | No empaquetadas en Debian; candidatas vía Flatpak en fase 3 |
 | CyberChef | Candidata: descargar la release oficial en un hook (fase 2) |
+| radare2 / rizin / Cutter | No están en Debian 13 (radare2 solo en sid); candidatos vía .deb oficial o Flatpak en fase 2 |

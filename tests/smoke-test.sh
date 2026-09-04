@@ -5,7 +5,7 @@ set -u
 
 tools="
 nmap amass theHarvester recon-ng dnstwist whatweb exiftool mat2 gallery-dl yt-dlp instaloader
-olevba yara clamscan ssdeep binwalk r2 jupyter-notebook pandoc
+olevba yara clamscan ssdeep binwalk jupyter-notebook pandoc
 tor torsocks proxychains4 macchanger wg openvpn nft firejail onionshare-cli age
 sherlock maigret holehe socialscan ghunt h8mail bbot sigma capa pdfid censys
 subfinder dnsx httpx katana waybackurls assetfinder gau gowitness vt

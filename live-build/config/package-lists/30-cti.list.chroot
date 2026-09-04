@@ -8,7 +8,6 @@ python3-ssdeep
 hashdeep
 binwalk
 pev
-radare2
 binutils
 python3-requests
 python3-pandas

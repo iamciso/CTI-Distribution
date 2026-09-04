@@ -8,7 +8,7 @@ dnstwist
 whatweb
 wafw00f
 whois
-dnsutils
+bind9-dnsutils
 nmap
 masscan
 ipcalc
