@@ -107,6 +107,13 @@ analista de ciberinteligencia con enfoque de gobernanza (no ofensivo):
 Comandos propios: `cti-netcheck`, `cti-evidence`, `cti-keys`, `cti-feeds`, `cti-report`, `cti-selfaudit`,
 `cti-update`, `cti-extras`, `cti-smoke-test`, `cti-run`.
 
+## Documentación
+
+- [Manual de usuario](docs/manual.md): modos de uso, menú, flujos de trabajo (investigación con cadena de custodia, panorama de amenazas, auditoría), persistencia, instalación y resolución de problemas.
+- [Arquitectura](docs/arquitectura.md), [OPSEC](docs/opsec.md), [catálogo de herramientas](docs/catalogo-herramientas.md), [roadmap](docs/roadmap.md).
+
+Cada build publica, además de la ISO y `SHA256SUMS`, el SBOM del sistema de ficheros (SPDX y CycloneDX), un informe de vulnerabilidades conocidas y la lista de paquetes; las releases etiquetadas firman `SHA256SUMS` con GPG si el repositorio tiene el secreto `GPG_PRIVATE_KEY`.
+
 ## Estado
 
 Fase 0 (definición) completada. Fase 1 (primera ISO reproducible) en curso. Ver `docs/roadmap.md`.

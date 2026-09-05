@@ -12,7 +12,7 @@
 - [x] CI en verde: todos los paquetes existen en trixie.
 - [x] Primer build completo con `workflow_dispatch`; revisar `pipx-failed.txt` y `go-failed.txt`.
 - [x] Arranque en QEMU/VirtualBox: escritorio, red, `cti-netcheck`, `cti-smoke-test`.
-- [ ] Fijar versiones en `pipx-tools.txt` y `go-tools.txt`.
+- [x] Fijar versiones en `pipx-tools.txt`, `go-tools.txt` y `release-tools.txt` (`cti-update --latest` las ignora).
 - [x] Probar persistencia LUKS (VirtualBox, disco cifrado con `persistence.conf`).
 - [ ] Probar el instalador (Calamares con cifrado de disco).
 - [ ] Publicar `v0.1.0` con SHA256SUMS.
@@ -28,8 +28,8 @@
 - [x] Plataformas GRC y de casos bajo demanda: CISO Assistant, DFIR-IRIS, Timesketch, GoPhish, Miniflux.
 - [x] Hardening de la estación: sysctl, auditd, unattended-upgrades, Secure Boot, USBGuard a demanda.
 - [ ] Imágenes OVA y qcow2 publicadas junto a la ISO; variantes analista / gobernanza / lite (metapaquetes).
-- [ ] SBOM y firma GPG de cada release; informe de vulnerabilidades de la propia imagen.
-- [ ] Manual de usuario y playbooks (investigación con cadena de custodia, panorama de amenazas, auditoría).
+- [x] SBOM (SPDX y CycloneDX) e informe de vulnerabilidades (Grype) de cada build; firma GPG de SHA256SUMS si existe el secreto `GPG_PRIVATE_KEY`.
+- [x] Manual de usuario con flujos de trabajo (`docs/manual.md`).
 
 ## Fase 2 - Capa OPSEC completa
 

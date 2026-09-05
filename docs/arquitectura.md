@@ -70,6 +70,10 @@ porque falta el usuario `Debian-gdm`). Para conservar solo los datos entre versi
   terminal desde el menú; `generate-menu.py` es la excepción en Python).
 - Menú de herramientas: una línea por herramienta en `/opt/cti/menu/tools.tsv` (categoría, tipo,
   nombre, comando o `.desktop`, descripción). Añadir una herramienta = añadir una línea.
+- Las versiones de las herramientas externas están fijadas en los manifiestos (reproducibilidad); `cti-update --latest`
+  las ignora para pasar a las últimas publicadas. La imagen no incluye documentación de paquetes ni traducciones
+  distintas de español e inglés (`includes.chroot_before_packages/etc/dpkg/dpkg.cfg.d`), y el compilador Go se purga
+  tras compilar las herramientas.
 - Manifiestos de herramientas externas en `/opt/cti/manifests/` (fuente única de verdad para el build,
   para `cti-update` y para el smoke test). Los instaladores viven en `/opt/cti/lib/` y los hooks del
   build solo los invocan, de modo que un sistema instalado se actualiza con la misma lógica.
@@ -85,4 +89,4 @@ porque falta el usuario `Debian-gdm`). Para conservar solo los datos entre versi
 - Metapaquetes Debian (`ctidistro-osint`, `ctidistro-cti`, `ctidistro-opsec`) servidos desde un
   repositorio APT propio, para actualizar el conjunto de herramientas sin regenerar la ISO.
 - Variante "lab" con las plataformas preinstaladas y variante "lite" sin escritorio para servidores.
-- Build reproducible bit a bit (`SOURCE_DATE_EPOCH`, versiones fijadas en todos los manifiestos).
+- Build reproducible bit a bit (`SOURCE_DATE_EPOCH`; las versiones ya están fijadas en los manifiestos).
