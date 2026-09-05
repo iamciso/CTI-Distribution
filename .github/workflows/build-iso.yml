@@ -30,8 +30,10 @@ jobs:
               ls -lh *.iso
               sha256sum *.iso > SHA256SUMS
               # SBOM e informe de vulnerabilidades del sistema de ficheros de la imagen
-              sh /repo/tools/release/sbom.sh /repo/live-build/chroot /repo/live-build/sbom
-              cp *.packages sbom/ 2>/dev/null || true
+              # (un fallo aquí no debe impedir publicar la ISO)
+              sh /repo/tools/release/sbom.sh /repo/live-build/chroot /repo/live-build/sbom \
+                || echo "AVISO: no se pudo generar el SBOM"
+              mkdir -p sbom && cp *.packages sbom/ 2>/dev/null || true
             '
 
       - name: Publicar ISO como artefacto
