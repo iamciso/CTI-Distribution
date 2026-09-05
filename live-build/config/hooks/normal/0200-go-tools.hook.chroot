@@ -2,3 +2,7 @@
 # Herramientas Go compiladas en el build (ver /opt/cti/lib/install-go.sh y manifests/go-tools.txt).
 set -e
 sh /opt/cti/lib/install-go.sh
+# Los binarios Go son estáticos: el compilador (~600 MB) no hace falta en la imagen. cti-update lo
+# reinstala a demanda en sistemas instalados.
+apt-get -y purge golang-go 'golang-1.*' golang-src >/dev/null 2>&1 || true
+apt-get -y autoremove --purge >/dev/null 2>&1 || true
