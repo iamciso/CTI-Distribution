@@ -22,13 +22,16 @@ jobs:
       - name: Construir ISO en contenedor debian:trixie
         run: |
           docker run --rm --privileged \
-            -v "$PWD/live-build:/build" -w /build \
+            -v "$PWD:/repo" -w /repo/live-build \
             debian:trixie bash -euxc '
               apt-get update -qq
-              apt-get install -y -qq live-build
+              apt-get install -y -qq live-build curl jq ca-certificates
               lb build
               ls -lh *.iso
               sha256sum *.iso > SHA256SUMS
+              # SBOM e informe de vulnerabilidades del sistema de ficheros de la imagen
+              sh /repo/tools/release/sbom.sh /repo/live-build/chroot /repo/live-build/sbom
+              cp *.packages sbom/ 2>/dev/null || true
             '
 
       - name: Publicar ISO como artefacto
@@ -42,6 +45,24 @@ jobs:
           retention-days: 7
           compression-level: 0
 
+      - name: Publicar SBOM e informe de vulnerabilidades
+        uses: actions/upload-artifact@v4
+        with:
+          name: ctidistro-sbom
+          path: live-build/sbom/
+          retention-days: 30
+
+      - name: Firmar SHA256SUMS (solo tags, si existe el secreto GPG_PRIVATE_KEY)
+        if: startsWith(github.ref, 'refs/tags/v') && secrets.GPG_PRIVATE_KEY != ''
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          printf '%s' "$GPG_PRIVATE_KEY" | gpg --batch --import
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$GPG_PASSPHRASE" \
+            --armor --detach-sign --output live-build/SHA256SUMS.asc live-build/SHA256SUMS
+          gpg --verify live-build/SHA256SUMS.asc live-build/SHA256SUMS
+
       - name: Adjuntar a la release (solo tags)
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
@@ -49,3 +70,8 @@ jobs:
           files: |
             live-build/*.iso
             live-build/SHA256SUMS
+            live-build/SHA256SUMS.asc
+            live-build/sbom/ctidistro.spdx.json
+            live-build/sbom/ctidistro.cdx.json
+            live-build/sbom/vulns-summary.txt
+            live-build/sbom/*.packages
