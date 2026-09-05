@@ -1,29 +1,38 @@
 #!/bin/sh
 # Actualiza un sistema instalado (o persistente): paquetes Debian, herramientas pipx, venv, Go y
 # binarios de release, usando los mismos manifiestos e instaladores que el build de la ISO.
-# Uso: sudo cti-update [apt|pipx|venv|go|release|all]   (por defecto: all)
+# Uso: sudo cti-update [apt|pipx|venv|go|release|all] [--latest]
+#   Por defecto reinstala las versiones fijadas en /opt/cti/manifests (reproducible).
+#   --latest ignora las versiones fijadas y toma las últimas publicadas (PyPI, Go, GitHub).
 set -eu
 [ "$(id -u)" -eq 0 ] || { echo "Ejecuta con sudo: sudo cti-update" >&2; exit 1; }
-what=${1:-all}
-case "$what" in
-    apt|pipx|venv|go|release|all) ;;
-    *) echo "Uso: cti-update [apt|pipx|venv|go|release|all]" >&2; exit 1 ;;
-esac
+what=all; extra=""
+for arg in "$@"; do
+    case "$arg" in
+        apt|pipx|venv|go|release|all) what=$arg ;;
+        --latest) extra="--latest" ;;
+        -h|--help) sed -n '2,6p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+        *) echo "Uso: cti-update [apt|pipx|venv|go|release|all] [--latest]" >&2; exit 1 ;;
+    esac
+done
 run() { printf '\n\033[1;36m== %s ==\033[0m\n' "$1"; shift; "$@"; }
 case "$what" in apt|all)
     run "Paquetes Debian" sh -c 'apt-get update && apt-get -y full-upgrade && apt-get -y autoremove' ;;
 esac
 case "$what" in pipx|all)
-    run "Herramientas pipx" sh /opt/cti/lib/install-pipx.sh --upgrade ;;
+    # shellcheck disable=SC2086
+    run "Herramientas pipx" sh /opt/cti/lib/install-pipx.sh --upgrade $extra ;;
 esac
 case "$what" in venv|all)
     run "Entorno /opt/cti/venv" sh /opt/cti/lib/install-venv.sh --upgrade ;;
 esac
 case "$what" in go|all)
-    run "Herramientas Go" sh /opt/cti/lib/install-go.sh --upgrade ;;
+    # shellcheck disable=SC2086
+    run "Herramientas Go" sh /opt/cti/lib/install-go.sh --upgrade $extra ;;
 esac
 case "$what" in release|all)
-    run "Binarios de GitHub Releases" sh /opt/cti/lib/install-release.sh --upgrade ;;
+    # shellcheck disable=SC2086
+    run "Binarios de GitHub Releases" sh /opt/cti/lib/install-release.sh --upgrade $extra ;;
 esac
 printf '\nHerramientas que fallaron (si las hay):\n'
 for f in /opt/cti/manifests/*-failed.txt; do [ -s "$f" ] && { echo "-- $f"; cat "$f"; }; done

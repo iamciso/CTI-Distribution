@@ -1,10 +1,10 @@
 # Binarios oficiales publicados en GitHub Releases (para herramientas que no admiten "go install").
-# Formato: <nombre-binario>	<propietario/repo>	<expresion-regular-del-asset-linux-amd64>
-# El hook 0250 consulta la release "latest", descarga el .tar.gz o .zip que casa con la expresión y
+# Formato: <nombre-binario>	<propietario/repo>	<expresion-regular-del-asset-linux-amd64>	[etiqueta]
+# El hook 0250 consulta la release de la etiqueta (o "latest" si no hay etiqueta o con --latest), descarga el .tar.gz o .zip que casa con la expresión y
 # copia el binario <nombre> a /usr/local/bin. Los fallos quedan en release-failed.txt.
-trufflehog	trufflesecurity/trufflehog	trufflehog_.*_linux_amd64\.tar\.gz$
-phoneinfoga	sundowndev/phoneinfoga	phoneinfoga_Linux_x86_64\.tar\.gz$
-trivy	aquasecurity/trivy	trivy_.*_Linux-64bit\.tar\.gz$
-grype	anchore/grype	grype_.*_linux_amd64\.tar\.gz$
-syft	anchore/syft	syft_.*_linux_amd64\.tar\.gz$
-osv-scanner	google/osv-scanner	^osv-scanner_linux_amd64$
+trufflehog	trufflesecurity/trufflehog	trufflehog_.*_linux_amd64\.tar\.gz$	v3.97.4
+phoneinfoga	sundowndev/phoneinfoga	phoneinfoga_Linux_x86_64\.tar\.gz$	v2.11.0
+trivy	aquasecurity/trivy	trivy_.*_Linux-64bit\.tar\.gz$	v0.74.0
+grype	anchore/grype	grype_.*_linux_amd64\.tar\.gz$	v0.118.0
+syft	anchore/syft	syft_.*_linux_amd64\.tar\.gz$	v1.51.1
+osv-scanner	google/osv-scanner	^osv-scanner_linux_amd64$	v2.5.1

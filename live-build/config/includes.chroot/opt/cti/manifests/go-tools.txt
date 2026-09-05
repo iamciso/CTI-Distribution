@@ -1,23 +1,23 @@
 # Una herramienta por línea. Formato: <ruta-modulo>@<version>
 # TODO (fase 1): sustituir @latest por versiones fijas para builds reproducibles.
-github.com/owasp-amass/amass/v4/cmd/amass@latest
-github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
-github.com/projectdiscovery/dnsx/cmd/dnsx@latest
-github.com/projectdiscovery/httpx/cmd/httpx@latest
-github.com/projectdiscovery/katana/cmd/katana@latest
-github.com/tomnomnom/waybackurls@latest
-github.com/tomnomnom/assetfinder@latest
-github.com/lc/gau/v2/cmd/gau@latest
-github.com/sensepost/gowitness@latest
-github.com/VirusTotal/vt-cli/vt@latest
+github.com/owasp-amass/amass/v4/cmd/amass@v4.2.0
+github.com/projectdiscovery/subfinder/v2/cmd/subfinder@v2.16.0
+github.com/projectdiscovery/dnsx/cmd/dnsx@v1.3.0
+github.com/projectdiscovery/httpx/cmd/httpx@v1.11.0
+github.com/projectdiscovery/katana/cmd/katana@v1.7.0
+github.com/tomnomnom/waybackurls@v0.1.0
+github.com/tomnomnom/assetfinder@v0.1.1
+github.com/lc/gau/v2/cmd/gau@v2.2.4
+github.com/sensepost/gowitness@v0.0.0-20260422172756-4f562901bc23
+github.com/VirusTotal/vt-cli/vt@v0.0.0-20260707165039-b4cf77c4340f
 # Superficie de exposición y fugas
-github.com/projectdiscovery/uncover/cmd/uncover@latest
-github.com/projectdiscovery/asnmap/cmd/asnmap@latest
-github.com/projectdiscovery/cdncheck/cmd/cdncheck@latest
-github.com/projectdiscovery/tlsx/cmd/tlsx@latest
-github.com/hakluke/hakrawler@latest
-github.com/j3ssie/metabigor@latest
+github.com/projectdiscovery/uncover/cmd/uncover@v1.2.1
+github.com/projectdiscovery/asnmap/cmd/asnmap@v1.1.1
+github.com/projectdiscovery/cdncheck/cmd/cdncheck@v1.2.49
+github.com/projectdiscovery/tlsx/cmd/tlsx@v1.3.2
+github.com/hakluke/hakrawler@v0.0.0-20260805040537-52a16fe61bd1
+github.com/j3ssie/metabigor@v1.12.1
 # gitleaks declara su módulo con la ruta antigua (zricethezav); con gitleaks/gitleaks falla.
-github.com/zricethezav/gitleaks/v8@latest
+github.com/zricethezav/gitleaks/v8@v8.30.1
 # TruffleHog (replace en go.mod) y PhoneInfoga (assets web fuera del módulo) no admiten
 # "go install": se descargan como binarios de release, ver release-tools.txt.
